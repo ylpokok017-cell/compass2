@@ -3,24 +3,25 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#f5f3e9">
+<meta name="theme-color" content="#eff5ee">
 <meta name="description" content="適合 iPad 橫向操作的方位練習。用俯視地圖與第一身 AR 完成八道探險任務。">
 <title>方向探險站｜iPad 方位練習</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2324513d'/%3E%3Cpath d='M20 8l-2 10-10 6 3-10z' fill='%23fff8e4'/%3E%3C/svg%3E">
 <style>
 :root {
   color-scheme: light;
-  --page: #f5f3e9;
-  --paper: #fffdf7;
+  --page: #eff5ee;
+  --paper: rgba(252, 255, 250, .78);
+  --glass: rgba(246, 253, 248, .55);
   --ink: #192e24;
   --muted: #526457;
   --forest: #24513d;
   --forest-deep: #193b2c;
   --sage: #e6eddd;
-  --line: #d9dece;
+  --line: rgba(64, 98, 77, .2);
   --rust: #9a412b;
   --rust-soft: #f7e8de;
-  --shadow: 0 2px 3px #263f2b08, 0 15px 32px #263f2b0b;
+  --shadow: 0 5px 20px #263f2b0c;
   --gutter: clamp(18px, 3.3vw, 48px);
   --mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
   font-family: -apple-system, BlinkMacSystemFont, "PingFang TC", "Noto Sans CJK TC", "Microsoft JhengHei", sans-serif;
@@ -30,7 +31,7 @@
 body {
   margin: 0;
   color: var(--ink);
-  background: radial-gradient(ellipse at 95% 0%, #e8ecdc 0, transparent 46%), var(--page);
+  background: radial-gradient(ellipse at 93% 2%, #dceadf 0, transparent 54%), var(--page);
   -webkit-tap-highlight-color: transparent;
 }
 button { border: 0; font: inherit; color: inherit; cursor: pointer; touch-action: manipulation; }
@@ -50,7 +51,22 @@ h1, h2, p, figure { margin: 0; }
   stroke-linejoin: round;
 }
 .mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+.selfie-background {
+  position: fixed;
+  z-index: 0;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.selfie-background video, .selfie-background::after { position: absolute; inset: 0; width: 100%; height: 100%; }
+.selfie-background video { object-fit: cover; object-position: center 45%; transform: scaleX(-1); }
+.selfie-background::after {
+  content: "";
+  background: linear-gradient(105deg, #f0f8ec36, #eff8f024 55%, #f1f8ed42);
+}
 .app {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -63,8 +79,8 @@ h1, h2, p, figure { margin: 0; }
   padding-right: max(var(--gutter), env(safe-area-inset-right));
 }
 .masthead {
-  border-bottom: 1px solid #d8ddce;
-  background: #fbf9f0;
+  border-bottom: 1px solid var(--line);
+  background: var(--paper);
   padding-top: env(safe-area-inset-top);
 }
 .mast-inner {
@@ -74,6 +90,7 @@ h1, h2, p, figure { margin: 0; }
   justify-content: space-between;
   gap: 16px;
 }
+.mast-actions { display: flex; align-items: center; gap: clamp(8px, 1.5vw, 18px); }
 .brand {
   display: inline-flex;
   align-items: center;
@@ -104,7 +121,7 @@ h1, h2, p, figure { margin: 0; }
   border: 1px solid var(--line);
   border-radius: 8px;
   color: var(--forest);
-  background: #f2f4e9;
+  background: #f4f9ed8c;
   font-size: 13px;
   font-weight: 750;
 }
@@ -118,7 +135,15 @@ h1, h2, p, figure { margin: 0; }
   padding-top: clamp(24px, 5vh, 60px);
   padding-bottom: max(clamp(24px, 6vh, 68px), env(safe-area-inset-bottom));
 }
-.welcome-copy { max-width: 500px; }
+.welcome-copy { position: relative; isolation: isolate; max-width: 500px; }
+.selfie-on .welcome-copy::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -12px -8px;
+  border-radius: 17px;
+  background: #f7fdf1bd;
+}
 .eyebrow {
   display: flex;
   align-items: center;
@@ -167,7 +192,7 @@ h1, h2, p, figure { margin: 0; }
   border: 1px solid var(--line);
   background: var(--paper);
 }
-.difficulty-btn.active { border-color: #51765a; box-shadow: 0 0 0 1px #51765a inset; background: #e9efe1; }
+.difficulty-btn.active { border-color: #51765a; box-shadow: 0 0 0 1px #51765a inset; background: #e4efe4ce; }
 .difficulty-icon {
   display: grid;
   place-items: center;
@@ -205,26 +230,29 @@ h1, h2, p, figure { margin: 0; }
   font-weight: 800;
   white-space: nowrap;
 }
-.start-btn { min-height: 54px; gap: 24px; padding-inline: 17px; box-shadow: 0 4px 0 #183a2b; }
-.start-btn:active { transform: translateY(2px); box-shadow: 0 2px 0 #183a2b; }
+.start-btn { min-height: 54px; gap: 24px; padding-inline: 17px; }
+.start-btn:active { transform: translateY(1px); }
 .welcome-note { color: var(--muted); font-size: 12px; line-height: 1.6; }
 .welcome-note span { display: block; }
 .cover {
   min-width: 0;
   padding: 12px;
-  border: 1px solid #d5dbc8;
+  border: 1px solid var(--line);
   border-radius: 24px;
-  background: var(--paper);
+  background: var(--glass);
   box-shadow: var(--shadow);
 }
 .cover-art {
   position: relative;
   overflow: hidden;
-  border: 1px solid #cbd4bc;
+  border: 1px solid var(--line);
   border-radius: 15px;
-  background: #e8ecd7;
+  background: #e6efda5e;
 }
 .cover-art > svg { display: block; width: 100%; height: auto; }
+.cover-ground { opacity: .47; }
+.cover-terrain { opacity: .46; }
+.selfie-on .cover-ground, .selfie-on .cover-terrain { opacity: .21; }
 .cover-title {
   position: absolute;
   top: clamp(13px, 2.1vw, 29px);
@@ -292,10 +320,12 @@ h1, h2, p, figure { margin: 0; }
 }
 .quiet-btn .icon { width: 17px; height: 17px; }
 .quiet-btn:disabled { opacity: .55; }
+.selfie-btn { color: var(--forest-deep); }
+.selfie-btn.active, .selfie-btn.connecting { border-color: #729a7a; background: #e0f0e1d9; }
 .game {
   display: grid;
   grid-template-columns: minmax(0, 1.4fr) minmax(337px, 1fr);
-  gap: clamp(14px, 1.8vw, 25px);
+  gap: clamp(14px, 2.1vw, 28px);
   align-items: stretch;
   margin-block: clamp(13px, 2.6vh, 30px) auto;
   padding-bottom: max(18px, env(safe-area-inset-bottom));
@@ -304,8 +334,14 @@ h1, h2, p, figure { margin: 0; }
   min-width: 0;
   border: 1px solid var(--line);
   border-radius: 21px;
-  background: var(--paper);
+  background: var(--glass);
   box-shadow: var(--shadow);
+}
+.question-panel { background: var(--paper); }
+.selfie-on .stage { background: #f5fcf455; border-color: #fbfffbb3; }
+.selfie-on .masthead, .selfie-on .question-panel {
+  -webkit-backdrop-filter: blur(7px);
+  backdrop-filter: blur(7px);
 }
 .stage {
   display: flex;
@@ -321,6 +357,7 @@ h1, h2, p, figure { margin: 0; }
   gap: 10px;
   padding: 8px 12px 8px 15px;
 }
+.selfie-on .stage-header { border-radius: 20px 20px 0 0; background: #f3fbee8c; }
 .stage-heading { display: flex; align-items: center; gap: 10px; }
 .stage-index {
   display: grid;
@@ -341,9 +378,9 @@ h1, h2, p, figure { margin: 0; }
   display: flex;
   gap: 3px;
   padding: 3px;
-  border: 1px solid #e3e7da;
+  border: 1px solid var(--line);
   border-radius: 11px;
-  background: #f0f2e9;
+  background: #f3f8efb3;
 }
 .view-btn {
   display: flex;
@@ -374,12 +411,16 @@ h1, h2, p, figure { margin: 0; }
   position: relative;
   min-height: 276px;
   overflow: hidden;
-  border: 1px solid #cdd7bd;
+  border: 1px solid var(--line);
   border-radius: 13px;
-  background: radial-gradient(ellipse at 50% 45%, #eff1df, #e3e9d4 92%);
+  background: radial-gradient(ellipse at 50% 45%, #eff6e78a, #e0ecd673 92%);
 }
+.selfie-on .map-board { background: #e5f3df45; }
 .map-svg { position: absolute; inset: 0; width: 100%; height: 100%; }
 .chart-text { fill: #4d6853; font-family: var(--mono); font-size: 10px; letter-spacing: .12em; }
+.map-scale rect { fill: #f9fdf3; fill-opacity: .92; }
+.map-scale path { fill: none; stroke: #365c46; stroke-width: 1.5; }
+.map-scale text { fill: #264d39; font-size: 12px; letter-spacing: 0; font-weight: 800; }
 .chart-border { stroke: #638068; stroke-width: 1; opacity: .38; }
 .contour { fill: none; stroke: #7d9670; stroke-width: 1; opacity: .42; }
 .token-pin { fill: #fcfaf1; stroke: #7c9c7e; stroke-width: 1.3; }
@@ -414,6 +455,8 @@ h1, h2, p, figure { margin: 0; }
   font-weight: 650;
 }
 .map-legend > span { display: inline-flex; align-items: center; gap: 5px; }
+.map-legend b { color: var(--forest-deep); }
+.selfie-on .map-legend > span { border-radius: 6px; padding: 4px 6px; background: #f7fcf2d9; }
 .map-legend .legend-north { margin-left: auto; }
 .map-legend .icon { width: 15px; height: 15px; color: var(--forest); }
 .legend-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--forest); }
@@ -426,7 +469,7 @@ h1, h2, p, figure { margin: 0; }
   overflow: hidden;
   border: 1px solid #d5decb;
   border-radius: 12px;
-  background: #eef2e6;
+  background: #eff7eadd;
 }
 .heading-readout {
   position: relative;
@@ -506,19 +549,16 @@ h1, h2, p, figure { margin: 0; }
   isolation: isolate;
   min-height: 182px;
   overflow: hidden;
-  border: 1px solid #213e2f;
+  border: 1px solid #355d474f;
   border-radius: 13px;
-  color: #f9f5de;
-  background: #213e2f;
+  color: var(--forest-deep);
+  background: #d9ebda55;
 }
-#cameraVideo, .scene-art, .scene-overlay, .ar-marker-layer { position: absolute; inset: 0; width: 100%; height: 100%; }
-#cameraVideo { object-fit: cover; }
-#cameraVideo.mirror { transform: scaleX(-1); }
-.scene-art { display: block; }
-.camera-on .scene-art { display: none; }
+.scene-art, .scene-overlay, .ar-marker-layer { position: absolute; inset: 0; width: 100%; height: 100%; }
+.scene-art { display: block; opacity: .25; }
 .scene-overlay {
   pointer-events: none;
-  background: linear-gradient(180deg, #172f24a8, transparent 35%, transparent 62%, #172f2499);
+  background: linear-gradient(180deg, #eef7e64d, transparent 35%, transparent 64%, #d4e7d04d);
 }
 .scene-chip {
   position: absolute;
@@ -529,14 +569,14 @@ h1, h2, p, figure { margin: 0; }
   align-items: center;
   gap: 5px;
   padding: 4px 8px;
-  border: 1px solid #e3ead551;
+  border: 1px solid var(--line);
   border-radius: 6px;
-  color: #f8f5df;
-  background: #1c3529;
+  color: var(--forest-deep);
+  background: #f6fcf1e6;
   font-size: 11px;
   font-weight: 750;
 }
-.scene-chip::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: #c9d6a8; }
+.scene-chip::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: #558468; }
 .scene-reticle {
   position: absolute;
   left: 50%;
@@ -544,11 +584,11 @@ h1, h2, p, figure { margin: 0; }
   width: 62px;
   height: 62px;
   transform: translate(-50%, -50%);
-  border: 1px solid #f8f6d873;
+  border: 1px solid #295b416b;
   border-radius: 50%;
   pointer-events: none;
 }
-.scene-reticle::before, .scene-reticle::after { content: ""; position: absolute; top: 50%; left: 50%; background: #f9f4d0bd; }
+.scene-reticle::before, .scene-reticle::after { content: ""; position: absolute; top: 50%; left: 50%; background: #295b4175; }
 .scene-reticle::before { width: 88px; height: 1px; transform: translate(-50%, -50%); }
 .scene-reticle::after { width: 1px; height: 88px; transform: translate(-50%, -50%); }
 .facing-badge {
@@ -557,9 +597,9 @@ h1, h2, p, figure { margin: 0; }
   left: 50%;
   transform: translateX(-50%);
   padding: 4px 10px;
-  color: #fdf8de;
-  background: #1c3529;
-  border: 1px solid #e3ead551;
+  color: var(--forest-deep);
+  background: #f6fcf1e6;
+  border: 1px solid var(--line);
   border-radius: 6px;
   font-size: 11px;
   font-weight: 750;
@@ -584,25 +624,26 @@ h1, h2, p, figure { margin: 0; }
   border: 1px solid #fff8e6;
   border-radius: 12px;
   background: var(--marker-bg);
-  box-shadow: 0 4px 14px #132c2480;
+  box-shadow: 0 2px 8px #132c2433;
 }
 .ar-landmark-icon .icon { width: 27px; height: 27px; }
 .ar-landmark-name, .offscreen-marker {
   padding: 3px 6px;
-  border: 1px solid #e3ead551;
+  border: 1px solid var(--line);
   border-radius: 6px;
-  color: #f8f5df;
-  background: #1c3529;
+  color: var(--forest-deep);
+  background: #f9fff4ec;
   font-size: 11px;
   font-weight: 750;
   white-space: nowrap;
 }
-.ar-landmark-name small { color: #d8e5cc; font-size: 10px; }
+.ar-landmark-name { display: grid; gap: 2px; text-align: center; line-height: 1.2; }
+.ar-landmark-name small { color: #3d5d4a; font-size: 11px; }
 .offscreen-group { position: absolute; top: 21%; display: grid; gap: 4px; }
 .offscreen-group.left { left: 8px; justify-items: start; }
 .offscreen-group.right { right: 8px; justify-items: end; }
 .offscreen-marker { display: flex; gap: 4px; align-items: center; font-size: 10px; }
-.offscreen-marker .icon { width: 12px; height: 12px; color: #e2edc8; }
+.offscreen-marker .icon { width: 12px; height: 12px; color: #3d5d4a; }
 .turn-pad { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
 .turn-btn {
   min-height: 46px;
@@ -613,7 +654,7 @@ h1, h2, p, figure { margin: 0; }
   padding: 0 3px;
   border: 1px solid #d7dfcf;
   border-radius: 9px;
-  background: #f2f4ea;
+  background: #f3faefc7;
   color: var(--forest-deep);
   font-size: 13px;
   font-weight: 800;
@@ -677,7 +718,7 @@ h1, h2, p, figure { margin: 0; }
   border: 1px solid #d9e0d2;
   border-radius: 10px;
   color: var(--ink);
-  background: #f9faf4;
+  background: #f8fcf4d9;
   text-align: left;
 }
 .option-key {
@@ -693,7 +734,7 @@ h1, h2, p, figure { margin: 0; }
   font: 750 12px var(--mono);
 }
 .option-key .icon { width: 16px; height: 16px; }
-.option-copy { min-width: 0; font-size: 15px; line-height: 1.35; font-weight: 800; }
+.option-copy { min-width: 0; font-size: 15px; line-height: 1.35; font-weight: 800; white-space: pre-line; }
 .option-copy small { display: block; margin-top: 2px; color: var(--muted); font: 650 11px var(--mono); }
 .answer-btn.correct { border-color: #6f9a79; background: #e7f1e5; }
 .answer-btn.correct .option-key { border-color: var(--forest); color: white; background: var(--forest); }
@@ -801,11 +842,11 @@ h1, h2, p, figure { margin: 0; }
 }
 @media (max-width: 480px) {
   :root { --gutter: 10px; }
-  .mast-inner { min-height: 60px; gap: 8px; }
+  .mast-inner { min-height: 60px; gap: 8px; flex-wrap: wrap; padding-block: 5px; }
   .brand { gap: 6px; }
   .brand-name { font-size: 14px; }
   .brand-mark { width: 36px; height: 36px; }
-  .brand-caption, .restart-text { display: none; }
+  .brand-caption, .restart-text, .selfie-btn span, .progress > span { display: none; }
   .stage-index { display: none; }
   .stage-heading h2 { font-size: 14px; }
   .sensor-status { display: none; }
@@ -872,7 +913,11 @@ h1, h2, p, figure { margin: 0; }
   </symbol>
 </svg>
 
-<main class="app">
+<div class="selfie-background" id="cameraBackdrop" aria-hidden="true" hidden>
+  <video id="cameraVideo" playsinline muted autoplay></video>
+</div>
+
+<main class="app" id="app">
   <header class="masthead">
     <div class="frame mast-inner">
       <button class="brand" id="homeBtn" type="button" aria-label="方向探險站首頁">
@@ -882,19 +927,24 @@ h1, h2, p, figure { margin: 0; }
           <span class="brand-caption mono">DIRECTION FIELD LAB</span>
         </span>
       </button>
-      <div class="edition" id="introEdition">
-        <svg class="icon" aria-hidden="true"><use href="#i-tablet"/></svg>iPad 橫向版
-      </div>
-      <div class="game-toolbar" id="gameToolbar" hidden>
-        <div class="progress">
-          <span>進度</span><strong id="progressLabel" class="mono">1 / 8</strong>
-          <div class="progress-track" id="progressTrack" aria-hidden="true"></div>
+      <div class="mast-actions">
+        <div class="edition" id="introEdition">
+          <svg class="icon" aria-hidden="true"><use href="#i-tablet"/></svg>iPad 橫向版
         </div>
-        <div class="score">
-          <span>分數</span><strong class="mono" id="scoreLabel">000</strong>
+        <div class="game-toolbar" id="gameToolbar" hidden>
+          <div class="progress">
+            <span>進度</span><strong id="progressLabel" class="mono">1 / 8</strong>
+            <div class="progress-track" id="progressTrack" aria-hidden="true"></div>
+          </div>
+          <div class="score">
+            <span>分數</span><strong class="mono" id="scoreLabel">000</strong>
+          </div>
+          <button class="quiet-btn" id="restartBtn" type="button" aria-label="重新生成一局">
+            <svg class="icon" aria-hidden="true"><use href="#i-restart"/></svg><span class="restart-text">重開</span>
+          </button>
         </div>
-        <button class="quiet-btn" id="restartBtn" type="button" aria-label="重新生成一局">
-          <svg class="icon" aria-hidden="true"><use href="#i-restart"/></svg><span class="restart-text">重開</span>
+        <button class="quiet-btn selfie-btn" id="cameraBtn" type="button" aria-label="自拍背景" aria-controls="cameraBackdrop" aria-pressed="false" title="用前鏡頭把自己顯示在整頁背景">
+          <svg class="icon" aria-hidden="true"><use href="#i-camera"/></svg><span id="cameraBtnText">自拍背景</span>
         </button>
       </div>
     </div>
@@ -924,7 +974,7 @@ h1, h2, p, figure { margin: 0; }
         <button class="primary-btn start-btn" id="startBtn" type="button">
           開始探險<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>
         </button>
-        <p class="welcome-note"><span>可用按鈕操作 AR</span><span>相機和感應器可選用</span></p>
+        <p class="welcome-note"><span>可用按鈕操作第一身視角</span><span>頂部可開啟自拍背景</span></p>
       </div>
     </div>
 
@@ -935,9 +985,9 @@ h1, h2, p, figure { margin: 0; }
             <pattern id="cover-grid" width="29" height="29" x="14" y="9" patternUnits="userSpaceOnUse"><path d="M0 29V0h29" fill="none" stroke="#799776" stroke-opacity=".32"/></pattern>
             <marker id="cover-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="m0 0 9 5-9 5z" fill="#a54e35"/></marker>
           </defs>
-          <rect width="640" height="470" fill="#e8ecd7"/>
-          <path d="M0 0h232c-11 33-59 56-70 100-17 60-74 56-98 102-23 43 3 72-64 100z" fill="#d8e3c5"/>
-          <path d="M640 163c-63 32-44 86-86 110-30 17-58 33-39 67 20 35-6 55-39 65-21 6-40 30-49 65h213z" fill="#d5e2ca"/>
+          <rect class="cover-ground" width="640" height="470" fill="#e8ecd7"/>
+          <path class="cover-terrain" d="M0 0h232c-11 33-59 56-70 100-17 60-74 56-98 102-23 43 3 72-64 100z" fill="#d8e3c5"/>
+          <path class="cover-terrain" d="M640 163c-63 32-44 86-86 110-30 17-58 33-39 67 20 35-6 55-39 65-21 6-40 30-49 65h213z" fill="#d5e2ca"/>
           <use href="#atlas-contours" x="0" y="0" width="640" height="470"/>
           <rect x="15" y="15" width="610" height="440" fill="url(#cover-grid)" class="chart-border" style="opacity:1;stroke-opacity:.45"/>
           <circle cx="321" cy="260" r="123" fill="#f6f2dc" fill-opacity=".36" stroke="#799575" stroke-opacity=".65" stroke-dasharray="4 5"/>
@@ -1005,7 +1055,7 @@ h1, h2, p, figure { margin: 0; }
         <div class="map-board">
           <svg class="map-svg" viewBox="0 0 640 420" role="img" aria-labelledby="mapSvgTitle mapSvgDesc">
             <title id="mapSvgTitle">俯視探索地圖</title>
-            <desc id="mapSvgDesc">地圖上方是北，人物在中心。</desc>
+            <desc id="mapSvgDesc">地圖上方是北，人物在中心。每格代表 100 m。</desc>
             <defs>
               <pattern id="game-grid" width="44" height="44" x="320" y="210" patternUnits="userSpaceOnUse">
                 <path d="M0 44V0h44" fill="none" stroke="#789678" stroke-opacity=".45"/>
@@ -1018,13 +1068,18 @@ h1, h2, p, figure { margin: 0; }
             <rect x="24" y="24" width="85" height="23" rx="4" fill="#f4f3e5" stroke="#aebfa4"/>
             <text x="34" y="39" class="chart-text">FIELD GRID</text>
             <use href="#compass-rose" x="518" y="23" width="100" height="100"/>
+            <g class="map-scale" transform="translate(27 378)" aria-hidden="true">
+              <rect x="-6" y="-8" width="56" height="30" rx="4"/>
+              <path d="M0 -3v7h44v-7"/>
+              <text x="22" y="17" text-anchor="middle" class="chart-text">100 m</text>
+            </g>
             <g id="pathLayer"></g>
             <g id="tokenLayer"></g>
           </svg>
         </div>
         <div class="map-legend">
           <span><i class="legend-dot" aria-hidden="true"></i>人物固定在中心</span>
-          <span>每格距離相同</span>
+          <span>每格 <b class="mono">100 m</b></span>
           <span class="legend-north"><svg class="icon" aria-hidden="true"><use href="#i-up"/></svg>上方為北</span>
         </div>
       </div>
@@ -1040,7 +1095,6 @@ h1, h2, p, figure { margin: 0; }
           </div>
         </div>
         <div class="ar-scene" id="arScene">
-          <video id="cameraVideo" playsinline muted autoplay aria-hidden="true" hidden></video>
           <svg class="scene-art" viewBox="0 0 640 320" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
             <defs>
               <linearGradient id="scene-sky" x2="0" y2="1"><stop stop-color="#3a5d4e"/><stop offset="1" stop-color="#95a078"/></linearGradient>
@@ -1055,7 +1109,7 @@ h1, h2, p, figure { margin: 0; }
           </svg>
           <div class="scene-overlay" aria-hidden="true"></div>
           <div class="scene-reticle" aria-hidden="true"></div>
-          <span class="scene-chip" id="cameraInfo">模擬視野</span>
+          <span class="scene-chip">模擬視角 · 直線距離</span>
           <div class="ar-marker-layer" id="arMarkerLayer"></div>
           <span class="facing-badge" id="facingBadge">面向北</span>
         </div>
@@ -1065,10 +1119,7 @@ h1, h2, p, figure { margin: 0; }
           <button class="turn-btn" data-turn="45" type="button">右轉 45°<svg class="icon" aria-hidden="true"><use href="#i-turn-right"/></svg></button>
           <button class="turn-btn" data-turn="90" type="button">右轉 90°<svg class="icon" aria-hidden="true"><use href="#i-turn-right"/></svg></button>
         </div>
-        <div class="ar-tools" role="group" aria-label="選用相機及方向感應器">
-          <button class="quiet-btn" id="cameraBtn" aria-pressed="false" type="button">
-            <svg class="icon" aria-hidden="true"><use href="#i-camera"/></svg><span id="cameraBtnText">開相機</span>
-          </button>
+        <div class="ar-tools" role="group" aria-label="選用方向感應器">
           <button class="quiet-btn" id="sensorBtn" aria-pressed="false" type="button">
             <svg class="icon" aria-hidden="true"><use href="#i-compass"/></svg><span id="sensorBtnText">啟用感應</span>
           </button>
@@ -1151,6 +1202,8 @@ const PLAYER = { id: 'player', name: '人物', x: 0, y: 0 };
 const SVG_NS = 'http://www.w3.org/2000/svg';
 const MAP_STEP = 44;
 const MAP_CENTER = { x: 320, y: 210 };
+const METRES_PER_CELL = 100;
+const metres = cells => `${Math.round(cells * METRES_PER_CELL)} m`;
 const ui = Object.fromEntries([...document.querySelectorAll('[id]')].map(element => [element.id, element]));
 const viewButtons = [ui.mapModeBtn, ui.arModeBtn];
 
@@ -1201,25 +1254,27 @@ function turnOptions(correct){
   return shuffle([TURN_CHOICES.find(c=>c.id===String(correct)),
     ...shuffle(TURN_CHOICES.filter(c=>c.id!==String(correct))).slice(0,3)]);
 }
-function routeOptions(target){
-  // Only diagonal points are selected. Each route ends at a distinct point.
-  const ax=Math.abs(target.x),ay=Math.abs(target.y);
-  const xDir=target.x>0?'東':'西',yDir=target.y>0?'南':'北';
-  const wrongX=target.x>0?'西':'東',wrongY=target.y>0?'北':'南';
-  const choices=[
-    {id:'correct',label:`先向${xDir}走 ${ax} 格，再向${yDir}走 ${ay} 格`},
-    {id:'wrong-x',label:`先向${wrongX}走 ${ax} 格，再向${yDir}走 ${ay} 格`},
-    {id:'wrong-y',label:`先向${xDir}走 ${ax} 格，再向${wrongY}走 ${ay} 格`},
-    {id:'wrong-both',label:`先向${wrongX}走 ${ax} 格，再向${wrongY}走 ${ay} 格`}
-  ];
-  return shuffle(choices);
+function routeOptions(target) {
+  const horizontal = metres(Math.abs(target.x));
+  const vertical = metres(Math.abs(target.y));
+  const xDir = target.x > 0 ? '東' : '西';
+  const yDir = target.y > 0 ? '南' : '北';
+  const wrongX = target.x > 0 ? '西' : '東';
+  const wrongY = target.y > 0 ? '北' : '南';
+  const route = (id, first, second) => ({
+    id, label: `向${first}走 ${horizontal}\n再向${second}走 ${vertical}`
+  });
+  return shuffle([
+    route('correct', xDir, yDir), route('wrong-x', wrongX, yDir),
+    route('wrong-y', xDir, wrongY), route('wrong-both', wrongX, wrongY)
+  ]);
 }
 function worldGenerate(){
   const positions=shuffle(DIRS).slice(0,6);
   const length=2+Math.floor(Math.random()*2);
   return shuffle(LANDMARKS).slice(0,6).map((landmark,i)=>{
     const p=positions[i];
-    return {...landmark,x:p.dx*length,y:p.dy*length,distance:length,directionId:p.id};
+    return {...landmark,x:p.dx*length,y:p.dy*length,directionId:p.id};
   });
 }
 function generateQuestions(){
@@ -1236,6 +1291,7 @@ function generateQuestions(){
   const [e,f]=shuffle(shuffled.filter(x=>x.id!==a.id&&x.id!==b.id)).slice(0,2);
   const routeTarget=pick(state.world.filter(x=>x.x!==0&&x.y!==0));
   const routeCorner={x:routeTarget.x,y:0};
+  const routeStep=metres(Math.abs(routeTarget.x));
   const pairDir=bearing(where(a.id),where(b.id));
   const cdDir=bearing(where(c.id),where(d.id));
   const returnDir=bearing(where(e.id),where('player'));
@@ -1283,10 +1339,10 @@ function generateQuestions(){
       options:relAnswers,correct:String(relativeAngle),
       explanation:`人物面向${relFacing.name}時，${relTarget.name}位於${relativeNames[relativeAngle]}。位置沒變，變的是自己的面向。`,paths:[['player',relTarget.id]]},
     {id:8,mode:'ar',skill:'兩步路線',type:'route',title:`從中心前往「${routeTarget.name}」，哪一條兩段路線能走到它？`,
-      note:'切到俯視地圖數格，想像人物走完兩段路。',
-      hint:`先比較目標在中心的東／西哪側，再比較北／南哪側，各要走${routeTarget.distance}格。`,
+      note:'切到俯視地圖，用比例尺讀出兩段路程。',
+      hint:`先看目標在東面還是西面，再看它在北面還是南面。兩段各走 ${routeStep}。`,
       options:routeOptions(routeTarget),correct:'correct',
-      explanation:`${routeTarget.name}在中心的${dirName(routeTarget.directionId)}方，要沿兩個直角方向各走${routeTarget.distance}格才能到達。`,paths:[['player',routeCorner],[routeCorner,routeTarget.id]]}
+      explanation:`${routeTarget.name}在中心的${dirName(routeTarget.directionId)}方。先走 ${routeStep}，轉 90° 後再走 ${routeStep}。`,paths:[['player',routeCorner],[routeCorner,routeTarget.id]]}
   ];
 }
 const current = () => state.questions[state.index];
@@ -1338,7 +1394,6 @@ function focusQuestion() {
 
 function showIntro() {
   if (!ui.introScreen.hidden) return;
-  stopCamera();
   disableSensor();
   toast('');
   setScreen(false);
@@ -1374,8 +1429,7 @@ function setMode(mode) {
   ui.viewIndex.textContent = isMap ? '01' : '02';
   selectButton(viewButtons[0], isMap);
   selectButton(viewButtons[1], !isMap);
-  if (isMap) stopCamera();
-  else renderAR();
+  if (!isMap) renderAR();
 }
 
 function renderProgress() {
@@ -1570,11 +1624,11 @@ function renderMap() {
   }
   const positions = state.world.map(item => {
     const steps = [];
-    if (item.x) steps.push(`向${item.x > 0 ? '右' : '左'} ${Math.abs(item.x)} 格`);
-    if (item.y) steps.push(`向${item.y > 0 ? '下' : '上'} ${Math.abs(item.y)} 格`);
+    if (item.x) steps.push(`向${item.x > 0 ? '右' : '左'} ${metres(Math.abs(item.x))}`);
+    if (item.y) steps.push(`向${item.y > 0 ? '下' : '上'} ${metres(Math.abs(item.y))}`);
     return `${item.name}：${steps.join('、')}`;
   });
-  ui.mapSvgDesc.textContent = `地圖上方是北，人物固定在中心。由中心看，${positions.join('；')}。`;
+  ui.mapSvgDesc.textContent = `地圖上方是北，人物固定在中心。每格代表 ${metres(1)}。由中心看，${positions.join('；')}。`;
 }
 
 function updateSensorUi() {
@@ -1642,7 +1696,7 @@ function renderARLandmarks() {
     const tile = node('span', 'ar-landmark-icon');
     tile.append(icon(landmark.id));
     const label = node('span', 'ar-landmark-name', landmark.name + ' ');
-    label.append(node('small', 'mono', `${landmark.distance} 格`));
+    label.append(node('small', 'mono', metres(Math.hypot(landmark.x, landmark.y))));
     marker.append(tile, label);
     visible.append(marker);
   }
@@ -1766,10 +1820,9 @@ function manualTurn(step) {
 
 function updateCameraUi() {
   selectButton(ui.cameraBtn, cameraReady);
-  ui.cameraBtn.disabled = cameraPending;
-  ui.cameraBtnText.textContent = cameraPending ? '連接中…' : cameraReady ? '關相機' : '開相機';
-  ui.cameraInfo.textContent = cameraReady ? '相機背景 · 遊戲地標' : '模擬視野';
-  ui.arScene.classList.toggle('camera-on', cameraReady);
+  ui.cameraBtn.classList.toggle('connecting', cameraPending);
+  ui.cameraBtnText.textContent = cameraPending ? '取消開啟' : cameraReady ? '關閉自拍' : '自拍背景';
+  ui.app.classList.toggle('selfie-on', cameraReady);
 }
 
 function stopCamera() {
@@ -1780,19 +1833,17 @@ function stopCamera() {
   cameraStream = null;
   if (stream) stream.getTracks().forEach(track => track.stop());
   ui.cameraVideo.srcObject = null;
-  ui.cameraVideo.hidden = true;
-  ui.cameraVideo.classList.remove('mirror');
+  ui.cameraBackdrop.hidden = true;
   updateCameraUi();
 }
 
 async function toggleCamera() {
-  if (cameraStream && cameraReady) {
+  if (cameraPending || cameraStream) {
     stopCamera();
     return;
   }
-  if (cameraPending || state.mode !== 'ar') return;
   if (!window.isSecureContext || !navigator.mediaDevices?.getUserMedia) {
-    toast('相機需要 HTTPS 和 Safari 相機權限。可用模擬視野繼續。');
+    toast('自拍背景需要 HTTPS 和 Safari 相機權限。');
     return;
   }
   const request = ++cameraRequestSeq;
@@ -1800,33 +1851,35 @@ async function toggleCamera() {
   updateCameraUi();
   try {
     const stream = await navigator.mediaDevices.getUserMedia({
-      video: { facingMode: { ideal: 'environment' } }, audio: false
+      video: { facingMode: { exact: 'user' }, width: { ideal: 1280 }, height: { ideal: 720 } },
+      audio: false
     });
-    if (request !== cameraRequestSeq || state.mode !== 'ar' || document.visibilityState === 'hidden') {
+    if (request !== cameraRequestSeq || document.visibilityState === 'hidden') {
       stream.getTracks().forEach(track => track.stop());
       if (request === cameraRequestSeq) stopCamera();
       return;
     }
     cameraStream = stream;
     const track = stream.getVideoTracks()[0];
-    ui.cameraVideo.classList.toggle('mirror', track?.getSettings?.()?.facingMode === 'user');
+    const facing = track?.getSettings?.()?.facingMode;
+    if (!track || (facing && facing !== 'user')) throw new Error('Front camera unavailable');
+    track.addEventListener('ended', () => {
+      if (cameraStream !== stream) return;
+      stopCamera();
+      toast('前鏡頭已停止，已恢復原本背景。');
+    });
     ui.cameraVideo.srcObject = stream;
-    ui.cameraVideo.hidden = false;
+    ui.cameraBackdrop.hidden = false;
     await ui.cameraVideo.play();
     if (request !== cameraRequestSeq) return;
     cameraReady = true;
     cameraPending = false;
     updateCameraUi();
-    track?.addEventListener('ended', () => {
-      if (cameraStream !== stream) return;
-      stopCamera();
-      toast('相機已停止，已切換到模擬視野。');
-    });
-    toast('相機畫面只在本機顯示。');
+    toast('自拍背景已開啟，畫面只在本機顯示。');
   } catch {
     if (request !== cameraRequestSeq) return;
     stopCamera();
-    toast('未能開啟相機。可用模擬視野繼續。');
+    toast('未能開啟前鏡頭。可繼續作答。');
   }
 }
 
