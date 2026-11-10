@@ -410,10 +410,14 @@ h1, h2, p, figure { margin: 0; }
   /* Keep the landmarks clear of the quiz while the grid continues underneath it. */
   overflow: visible;
 }
-.chart-text { fill: #4d6853; font-family: var(--mono); font-size: 10px; letter-spacing: .12em; }
-.map-scale rect { fill: #f9fdf3; fill-opacity: .92; }
-.map-scale path { fill: none; stroke: #365c46; stroke-width: 1.5; }
-.map-scale text { fill: #264d39; font-size: 12px; letter-spacing: 0; font-weight: 800; }
+.map-compass {
+  position: absolute;
+  inset-block-start: clamp(8px, 1.2vw, 14px);
+  inset-inline-start: clamp(8px, 1.2vw, 14px);
+  width: clamp(48px, 9vw, 124px);
+  height: auto;
+  pointer-events: none;
+}
 .chart-border { stroke: #638068; stroke-width: 1; opacity: .38; }
 .contour { fill: none; stroke: #7d9670; stroke-width: 1; opacity: .42; }
 .token-pin { fill: #fcfaf1; stroke: #7c9c7e; stroke-width: 1.3; }
@@ -1045,7 +1049,7 @@ h1, h2, p, figure { margin: 0; }
 
       <div class="view-panel" id="mapStage">
         <div class="map-board">
-          <svg class="map-svg" viewBox="16 4 608 408" role="img" aria-labelledby="mapSvgTitle mapSvgDesc">
+          <svg class="map-svg" viewBox="56 39 460 360" role="img" aria-labelledby="mapSvgTitle mapSvgDesc">
             <title id="mapSvgTitle">公園地圖</title>
             <desc id="mapSvgDesc">地圖上方是北，「你」是起點。每格是 100 m。</desc>
             <defs>
@@ -1057,14 +1061,11 @@ h1, h2, p, figure { margin: 0; }
             <rect x="-1280" y="-840" width="3840" height="2100" fill="url(#game-grid)"/>
             <use href="#atlas-contours" width="640" height="420"/>
             <path d="M320 -840v2100M-1280 210h3840" fill="none" stroke="#759278" stroke-opacity=".42"/>
-            <use href="#compass-rose" x="506" y="22" width="110" height="110"/>
-            <g class="map-scale" transform="translate(27 378)" aria-hidden="true">
-              <rect x="-6" y="-8" width="56" height="30" rx="4"/>
-              <path d="M0 -3v7h44v-7"/>
-              <text x="22" y="17" text-anchor="middle" class="chart-text">100 m</text>
-            </g>
             <g id="pathLayer"></g>
             <g id="tokenLayer"></g>
+          </svg>
+          <svg class="map-compass" viewBox="0 0 110 110" aria-hidden="true">
+            <use href="#compass-rose"/>
           </svg>
         </div>
         <div class="map-legend">
