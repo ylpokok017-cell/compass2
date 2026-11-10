@@ -322,11 +322,11 @@ h1, h2, p, figure { margin: 0; }
 .selfie-btn { color: var(--forest-deep); }
 .selfie-btn.active, .selfie-btn.connecting { border-color: #729a7a; background: #e0f0e1d9; }
 .game {
+  --quiz-width: clamp(342px, 32vw, 410px);
+  --game-inset: 12px;
   display: grid;
-  grid-template-columns: minmax(0, 1.4fr) minmax(337px, 1fr);
-  gap: clamp(14px, 2.1vw, 28px);
-  align-items: stretch;
-  margin-block: clamp(13px, 2.6vh, 30px) auto;
+  grid-template-columns: minmax(0, 1fr) var(--quiz-width);
+  margin-block: clamp(12px, 2vh, 24px) auto;
   padding-bottom: max(18px, env(safe-area-inset-bottom));
 }
 .stage, .question-panel {
@@ -336,17 +336,18 @@ h1, h2, p, figure { margin: 0; }
   background: var(--glass);
   box-shadow: var(--shadow);
 }
-.question-panel { background: var(--paper); }
 .selfie-on .stage { background: #f5fcf455; border-color: #fbfffbb3; }
-.selfie-on .masthead, .selfie-on .question-panel {
+.selfie-on .masthead {
   -webkit-backdrop-filter: blur(7px);
   backdrop-filter: blur(7px);
 }
 .stage {
+  grid-column: 1 / -1;
+  grid-row: 1;
   display: flex;
   flex-direction: column;
-  min-height: clamp(474px, calc(100vh - 118px), 740px);
-  min-height: clamp(474px, calc(100svh - 118px), 740px);
+  min-height: max(474px, calc(100vh - 118px));
+  min-height: max(474px, calc(100svh - 118px));
 }
 .stage-header {
   min-height: 68px;
@@ -354,6 +355,7 @@ h1, h2, p, figure { margin: 0; }
   justify-content: space-between;
   align-items: center;
   gap: 10px;
+  margin-inline-end: var(--quiz-width);
   padding: 8px 12px 8px 15px;
 }
 .selfie-on .stage-header { border-radius: 20px 20px 0 0; background: #f3fbee8c; }
@@ -388,7 +390,7 @@ h1, h2, p, figure { margin: 0; }
   min-width: 0;
   display: flex;
   flex-direction: column;
-  margin-inline: 12px;
+  margin-inline: var(--game-inset);
 }
 .map-board {
   flex: 1;
@@ -400,7 +402,14 @@ h1, h2, p, figure { margin: 0; }
   background: radial-gradient(ellipse at 50% 45%, #eff6e78a, #e0ecd673 92%);
 }
 .selfie-on .map-board { background: #e5f3df45; }
-.map-svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.map-svg {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: calc(100% - var(--quiz-width));
+  height: 100%;
+  /* Keep the landmarks clear of the quiz while the grid continues underneath it. */
+  overflow: visible;
+}
 .chart-text { fill: #4d6853; font-family: var(--mono); font-size: 10px; letter-spacing: .12em; }
 .map-scale rect { fill: #f9fdf3; fill-opacity: .92; }
 .map-scale path { fill: none; stroke: #365c46; stroke-width: 1.5; }
@@ -443,7 +452,7 @@ h1, h2, p, figure { margin: 0; }
 .map-legend .legend-north { margin-left: auto; }
 .map-legend .icon { width: 15px; height: 15px; color: var(--forest); }
 .legend-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--forest); }
-.ar-view { gap: 8px; }
+.ar-view { gap: 8px; margin-inline-end: calc(var(--game-inset) + var(--quiz-width)); }
 .ar-instrument {
   position: relative;
   display: grid;
@@ -638,7 +647,19 @@ h1, h2, p, figure { margin: 0; }
 .ar-tools .quiet-btn { font-size: 12px; padding-inline: 8px; }
 .ar-tools .active { background: #e5efdf; border-color: #95ac96; color: var(--forest-deep); }
 .sensor-status { flex: 1; padding-left: 3px; color: var(--muted); font-size: 11px; line-height: 1.4; text-align: right; }
-.question-panel { display: flex; flex-direction: column; padding: clamp(16px, 2.2vw, 30px); }
+.question-panel {
+  grid-column: 2;
+  grid-row: 1;
+  align-self: start;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  margin: var(--game-inset) calc(2 * var(--game-inset)) 47px 0;
+  padding: clamp(13px, 1.55vw, 23px);
+  background: var(--paper);
+  -webkit-backdrop-filter: blur(7px);
+  backdrop-filter: blur(7px);
+}
 .question-meta {
   display: flex;
   align-items: center;
@@ -664,7 +685,7 @@ h1, h2, p, figure { margin: 0; }
 .mission-number b { font-size: 13px; }
 .question-title {
   margin-top: 11px;
-  font-size: clamp(23px, 2.5vw, 35px);
+  font-size: clamp(22px, 2.4vw, 32px);
   line-height: 1.28;
   font-weight: 850;
   letter-spacing: -.025em;
@@ -675,7 +696,7 @@ h1, h2, p, figure { margin: 0; }
 .question-note:empty { display: none; }
 .question-panel.is-answered .question-note { display: none; }
 .options {
-  margin-top: clamp(12px, 2.15vh, 24px);
+  margin-top: clamp(10px, 1.7vh, 18px);
   padding-top: 10px;
   border-top: 1px solid #e0e4d8;
 }
@@ -685,11 +706,11 @@ h1, h2, p, figure { margin: 0; }
 .answer-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 7px; }
 .answer-btn {
   min-width: 0;
-  min-height: 55px;
+  min-height: 52px;
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 6px 8px;
+  gap: 6px;
+  padding: 6px 7px;
   border: 1px solid #d9e0d2;
   border-radius: 10px;
   color: var(--ink);
@@ -700,8 +721,8 @@ h1, h2, p, figure { margin: 0; }
   display: grid;
   place-items: center;
   flex: none;
-  width: 26px;
-  height: 26px;
+  width: 24px;
+  height: 24px;
   border: 1px solid #dbe2d3;
   border-radius: 6px;
   color: var(--forest);
@@ -740,7 +761,7 @@ h1, h2, p, figure { margin: 0; }
   font-size: 13px;
   line-height: 1.48;
 }
-.feedback { margin-top: auto; padding-top: 11px; }
+.feedback { padding-top: 11px; }
 .challenge-offer { margin-top: 12px; }
 .challenge-offer h2 { color: var(--forest-deep); font-size: 14px; }
 .feedback-copy {
@@ -793,26 +814,27 @@ h1, h2, p, figure { margin: 0; }
   .welcome h1 { font-size: clamp(43px, 5.5vw, 72px); }
   .welcome-lead { margin-top: 12px; }
   .difficulty { margin-top: 16px; }
-  .stage { min-height: clamp(465px, calc(100svh - 100px), 620px); }
-  .question-panel { padding: 15px 17px; }
-  .question-title { font-size: clamp(22px, 2.4vw, 30px); }
+  .stage { min-height: max(455px, calc(100svh - 100px)); }
+  .question-panel { padding: 14px 15px; }
   .question-note { margin-top: 6px; font-size: 13px; }
 }
 @media (orientation: landscape) and (max-width: 950px) {
   :root { --gutter: 14px; }
-  .game { grid-template-columns: minmax(0, 1.2fr) minmax(290px, 1fr); gap: 10px; }
+  .game { --quiz-width: clamp(308px, 35vw, 338px); --game-inset: 9px; }
   .stage-header { padding-inline: 9px; }
-  .view-panel { margin-inline: 8px; }
   .view-btn { padding-inline: 6px; }
+  .option-copy { font-size: 14px; }
   .sensor-status { display: none; }
 }
 @media (orientation: portrait), (max-width: 710px) {
   .welcome, .game { grid-template-columns: 1fr; }
+  .game { --quiz-width: 0px; gap: 14px; }
   .welcome { justify-items: center; gap: 24px; }
   .welcome-copy, .cover { width: min(100%, 570px); }
   .welcome h1 { font-size: clamp(43px, 8.2vw, 68px); }
+  .stage, .question-panel { grid-column: 1; grid-row: auto; }
   .stage { min-height: clamp(445px, 70vw, 590px); }
-  .question-panel { min-height: 420px; }
+  .question-panel { margin: 0; }
 }
 @media (max-width: 480px) {
   :root { --gutter: 10px; }
@@ -1023,18 +1045,18 @@ h1, h2, p, figure { margin: 0; }
 
       <div class="view-panel" id="mapStage">
         <div class="map-board">
-          <svg class="map-svg" viewBox="0 0 640 420" role="img" aria-labelledby="mapSvgTitle mapSvgDesc">
+          <svg class="map-svg" viewBox="16 4 608 408" role="img" aria-labelledby="mapSvgTitle mapSvgDesc">
             <title id="mapSvgTitle">公園地圖</title>
-            <desc id="mapSvgDesc">地圖上方是北，你在地圖中間。每格是 100 m。</desc>
+            <desc id="mapSvgDesc">地圖上方是北，「你」是起點。每格是 100 m。</desc>
             <defs>
               <pattern id="game-grid" width="44" height="44" x="320" y="210" patternUnits="userSpaceOnUse">
                 <path d="M0 44V0h44" fill="none" stroke="#789678" stroke-opacity=".45"/>
               </pattern>
               <marker id="route-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="m0 0 10 5-10 5z" fill="#a74730"/></marker>
             </defs>
+            <rect x="-1280" y="-840" width="3840" height="2100" fill="url(#game-grid)"/>
             <use href="#atlas-contours" width="640" height="420"/>
-            <rect x="13" y="13" width="614" height="394" fill="url(#game-grid)" stroke="#638068" stroke-opacity=".4"/>
-            <path d="M320 13v394M13 210h614" fill="none" stroke="#759278" stroke-opacity=".5"/>
+            <path d="M320 -840v2100M-1280 210h3840" fill="none" stroke="#759278" stroke-opacity=".42"/>
             <use href="#compass-rose" x="506" y="22" width="110" height="110"/>
             <g class="map-scale" transform="translate(27 378)" aria-hidden="true">
               <rect x="-6" y="-8" width="56" height="30" rx="4"/>
@@ -1046,7 +1068,7 @@ h1, h2, p, figure { margin: 0; }
           </svg>
         </div>
         <div class="map-legend">
-          <span><i class="legend-dot" aria-hidden="true"></i>你在地圖中間</span>
+          <span><i class="legend-dot" aria-hidden="true"></i>「你」是起點</span>
           <span>每格 <b class="mono">100 m</b></span>
           <span class="legend-north"><svg class="icon" aria-hidden="true"><use href="#i-up"/></svg>上方為北</span>
         </div>
@@ -1266,18 +1288,18 @@ function landmarkPairs() {
   return shuffle(pairs);
 }
 
-function positionQuestion(from, to, findLandmark, mode = 'map') {
+function positionQuestion(from, to, findLandmark) {
   const direction = bearing(from, to);
   const directionName = dirName(direction) + '方';
   const fromPlayer = from.id === PLAYER.id;
   const reference = fromPlayer ? '你的位置' : from.name;
   const belonging = fromPlayer ? '你的' : from.name + '的';
-  const note = fromPlayer ? (mode === 'ar' ? '用左轉或右轉找一找。' : '地圖的上方是北。') : `先在地圖上找${from.name}。`;
+  const note = fromPlayer ? '由「你」的位置看。' : `先在地圖上找${from.name}。`;
   const hint = findLandmark
-    ? (mode === 'ar' ? `面向${directionName}，看看畫面中間。` : `由${reference}向${directionName}看。`)
-    : (mode === 'ar' ? `讓${to.name}在畫面中間，再看上方的指南針。` : `由${reference}向${to.name}看。`);
+    ? `由${reference}向${directionName}看。`
+    : `由${reference}向${to.name}看。`;
   return {
-    mode, note, hint,
+    note, hint,
     title: findLandmark ? `${belonging}${directionName}有甚麼？` : `${to.name}在${belonging}哪一方？`,
     options: findLandmark ? landmarkOptions(from, to) : dirOptions(direction),
     correct: findLandmark ? to.id : direction,
@@ -1299,9 +1321,8 @@ function routeQuestion({ from, to, direction: second }) {
   const firstDistance = metres(Math.hypot(from.x, from.y));
   const secondDistance = metres(Math.hypot(to.x - from.x, to.y - from.y));
   return {
-    mode: 'map',
     title: `先到${from.name}，再到${to.name}。\n先向哪一方走？再向哪一方走？`,
-    note: '由地圖中間的「你」出發。',
+    note: '看地圖，由「你」的位置出發。',
     hint: `先由「你」看${from.name}，再由${from.name}看${to.name}。`,
     options,
     correct: routeId(first, second),
@@ -1312,7 +1333,7 @@ function routeQuestion({ from, to, direction: second }) {
 
 function generateQuestions() {
   const personal = shuffle(state.world).slice(0, GROUP_SIZE).map((to, index) =>
-    positionQuestion(PLAYER, to, index % 2 === 0, index < GROUP_SIZE / 2 ? 'map' : 'ar')
+    positionQuestion(PLAYER, to, index % 2 === 0)
   );
   const pairs = landmarkPairs();
   const used = new Set();
@@ -1404,13 +1425,14 @@ function setDifficulty(difficulty) {
 }
 
 function resetGame() {
+  const mode = state?.mode ?? 'map';
   state = {
-    world: worldGenerate(), questions: [], index: 0, mode: 'map', heading: 0,
+    world: worldGenerate(), questions: [], index: 0, mode, heading: 0,
     phase: 'playing', answered: false, hintUsed: false, choice: null, results: [], difficulty: modeChoice
   };
   state.questions = generateQuestions();
   disableSensor();
-  setMode('map');
+  setMode(mode);
   renderQuestion();
   renderMap();
   renderProgress();
@@ -1527,7 +1549,6 @@ function advanceQuestion() {
   state.answered = false;
   state.hintUsed = false;
   state.choice = null;
-  setMode(current().mode);
   renderQuestion();
   renderMap();
   renderProgress();
@@ -1633,7 +1654,7 @@ function renderMap() {
     if (item.y) steps.push(`向${item.y > 0 ? '下' : '上'} ${metres(Math.abs(item.y))}`);
     return `${steps.join('，')}是${item.name}。`;
   });
-  ui.mapSvgDesc.textContent = `地圖上方是北，你在地圖中間。每格是 ${metres(1)}。由你的位置看，${positions.join('')}`;
+  ui.mapSvgDesc.textContent = `地圖上方是北，「你」是起點。每格是 ${metres(1)}。由你的位置看，${positions.join('')}`;
 }
 
 function updateSensorUi() {
