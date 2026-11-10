@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#eff5ee">
-<meta name="description" content="適合 iPad 橫向操作的方位練習。用俯視地圖與第一身 AR 完成八道探險任務。">
-<title>方向探險站｜iPad 方位練習</title>
+<meta name="description" content="橫放 iPad，一起看地圖、找方向、學轉身。">
+<title>方向探險站｜一起找方向</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2324513d'/%3E%3Cpath d='M20 8l-2 10-10 6 3-10z' fill='%23fff8e4'/%3E%3C/svg%3E">
 <style>
 :root {
@@ -112,7 +112,7 @@ h1, h2, p, figure { margin: 0; }
 }
 .brand-mark .icon { width: 28px; height: 28px; stroke-width: 1.3; }
 .brand-name { display: block; font-size: 17px; line-height: 1.25; font-weight: 800; letter-spacing: .08em; }
-.brand-caption { display: block; margin-top: 3px; color: var(--muted); font-size: 10px; letter-spacing: .13em; }
+.brand-caption { display: block; margin-top: 3px; color: var(--muted); font-size: 11px; letter-spacing: .06em; }
 .edition {
   display: inline-flex;
   align-items: center;
@@ -233,7 +233,6 @@ h1, h2, p, figure { margin: 0; }
 .start-btn { min-height: 54px; gap: 24px; padding-inline: 17px; }
 .start-btn:active { transform: translateY(1px); }
 .welcome-note { color: var(--muted); font-size: 12px; line-height: 1.6; }
-.welcome-note span { display: block; }
 .cover {
   min-width: 0;
   padding: 12px;
@@ -259,7 +258,7 @@ h1, h2, p, figure { margin: 0; }
   left: clamp(13px, 2.1vw, 29px);
 }
 .cover-title strong { display: block; font-size: clamp(15px, 1.9vw, 26px); letter-spacing: .1em; }
-.cover-title small { display: block; margin-top: 4px; color: #4c6653; font-size: clamp(9px, 1vw, 12px); letter-spacing: .13em; }
+.cover-title small { display: block; margin-top: 4px; color: #4c6653; font-size: clamp(11px, 1.2vw, 14px); }
 .cover-meta {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -358,22 +357,7 @@ h1, h2, p, figure { margin: 0; }
   padding: 8px 12px 8px 15px;
 }
 .selfie-on .stage-header { border-radius: 20px 20px 0 0; background: #f3fbee8c; }
-.stage-heading { display: flex; align-items: center; gap: 10px; }
-.stage-index {
-  display: grid;
-  place-items: center;
-  width: 36px;
-  height: 36px;
-  flex: none;
-  border-radius: 9px;
-  border: 1px solid #dbe3d3;
-  color: var(--forest);
-  background: #eef1e6;
-  font-size: 14px;
-  font-weight: 700;
-}
-.stage-heading h2 { font-size: 16px; font-weight: 850; white-space: nowrap; }
-.stage-heading p { margin-top: 2px; color: var(--muted); font-size: 10px; letter-spacing: .11em; }
+.stage-header h2 { font-size: 17px; font-weight: 850; white-space: nowrap; }
 .view-switch {
   display: flex;
   gap: 3px;
@@ -433,16 +417,15 @@ h1, h2, p, figure { margin: 0; }
 .token-player .token-name { fill: #fff9e6; }
 [data-landmark="water"] { --marker-bg: #e0edf0; --marker-fg: #2a6375; }
 [data-landmark="garden"] { --marker-bg: #e7edda; --marker-fg: #3b6549; }
-[data-landmark="station"] { --marker-bg: #eee7f2; --marker-fg: #684d78; }
-[data-landmark="telescope"] { --marker-bg: #e4ecf5; --marker-fg: #395875; }
+[data-landmark="tree"] { --marker-bg: #dcebdd; --marker-fg: #365943; }
+[data-landmark="bridge"] { --marker-bg: #e4ecf5; --marker-fg: #395875; }
 [data-landmark="play"] { --marker-bg: #f5e7dc; --marker-fg: #994b35; }
-[data-landmark="gate"] { --marker-bg: #f4ead3; --marker-fg: #79552d; }
+[data-landmark="bench"] { --marker-bg: #f4ead3; --marker-fg: #79552d; }
 [data-landmark="pond"] { --marker-bg: #deeeeb; --marker-fg: #2f665d; }
-[data-landmark="power"] { --marker-bg: #f0ebd1; --marker-fg: #6d5c28; }
+[data-landmark="duck"] { --marker-bg: #f6ebbe; --marker-fg: #77591c; }
 .map-token:not(.token-player) .token-pin { fill: var(--marker-bg, #fcfaf1); }
 .map-token:not(.token-player) .token-icon { color: var(--marker-fg, #315b44); }
 .route-line { stroke: #a74730; stroke-width: 2.6; stroke-dasharray: 5 3; fill: none; }
-.route-corner { fill: #a74730; stroke: #fff7e7; stroke-width: 1.5; }
 .map-legend {
   display: flex;
   flex-wrap: wrap;
@@ -474,7 +457,7 @@ h1, h2, p, figure { margin: 0; }
 .heading-readout {
   position: relative;
   z-index: 2;
-  width: clamp(81px, 8vw, 115px);
+  width: clamp(92px, 9.2vw, 124px);
   display: grid;
   place-content: center;
   text-align: center;
@@ -482,10 +465,10 @@ h1, h2, p, figure { margin: 0; }
   border-right: 1px solid #d5decb;
   padding: 4px;
   color: var(--muted);
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 750;
 }
-.heading-readout strong { color: var(--forest-deep); font-size: clamp(23px, 2.8vw, 34px); line-height: 1; letter-spacing: -.06em; }
+.heading-readout strong { color: var(--forest-deep); font-size: clamp(22px, 2.35vw, 30px); line-height: 1.15; white-space: nowrap; }
 .compass-strip { position: relative; overflow: hidden; }
 .compass-strip::before {
   content: "";
@@ -502,7 +485,9 @@ h1, h2, p, figure { margin: 0; }
   bottom: 16px;
   transform: translateX(-50%);
   color: var(--forest-deep);
-  font: 800 12px var(--mono);
+  font-size: 13px;
+  font-weight: 800;
+  white-space: nowrap;
 }
 .hud-center-marker {
   position: absolute;
@@ -591,20 +576,6 @@ h1, h2, p, figure { margin: 0; }
 .scene-reticle::before, .scene-reticle::after { content: ""; position: absolute; top: 50%; left: 50%; background: #295b4175; }
 .scene-reticle::before { width: 88px; height: 1px; transform: translate(-50%, -50%); }
 .scene-reticle::after { width: 1px; height: 88px; transform: translate(-50%, -50%); }
-.facing-badge {
-  position: absolute;
-  bottom: 8px;
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 4px 10px;
-  color: var(--forest-deep);
-  background: #f6fcf1e6;
-  border: 1px solid var(--line);
-  border-radius: 6px;
-  font-size: 11px;
-  font-weight: 750;
-  white-space: nowrap;
-}
 .ar-marker-layer { pointer-events: none; }
 .ar-landmark {
   position: absolute;
@@ -661,6 +632,8 @@ h1, h2, p, figure { margin: 0; }
   white-space: nowrap;
 }
 .turn-btn .icon { width: 16px; height: 16px; }
+.turn-btn span { line-height: 1.24; text-align: center; }
+.turn-btn small { display: block; color: var(--muted); font-size: 11px; }
 .ar-tools { display: flex; flex-wrap: wrap; align-items: center; gap: 5px; margin-bottom: 9px; }
 .ar-tools .quiet-btn { font-size: 12px; padding-inline: 8px; }
 .ar-tools .active { background: #e5efdf; border-color: #95ac96; color: var(--forest-deep); }
@@ -696,8 +669,10 @@ h1, h2, p, figure { margin: 0; }
   font-weight: 850;
   letter-spacing: -.025em;
   overflow-wrap: anywhere;
+  white-space: pre-line;
 }
 .question-note { margin-top: 8px; color: var(--muted); font-size: 14px; line-height: 1.56; }
+.question-note:empty { display: none; }
 .question-panel.is-answered .question-note { display: none; }
 .options {
   margin-top: clamp(12px, 2.15vh, 24px);
@@ -735,7 +710,6 @@ h1, h2, p, figure { margin: 0; }
 }
 .option-key .icon { width: 16px; height: 16px; }
 .option-copy { min-width: 0; font-size: 15px; line-height: 1.35; font-weight: 800; white-space: pre-line; }
-.option-copy small { display: block; margin-top: 2px; color: var(--muted); font: 650 11px var(--mono); }
 .answer-btn.correct { border-color: #6f9a79; background: #e7f1e5; }
 .answer-btn.correct .option-key { border-color: var(--forest); color: white; background: var(--forest); }
 .answer-btn.wrong { border-color: #bc7a68; background: #f7eae3; }
@@ -767,6 +741,8 @@ h1, h2, p, figure { margin: 0; }
   line-height: 1.48;
 }
 .feedback { margin-top: auto; padding-top: 11px; }
+.challenge-offer { margin-top: 12px; }
+.challenge-offer h2 { color: var(--forest-deep); font-size: 14px; }
 .feedback-copy {
   padding: 8px 10px;
   border-left: 3px solid #6e9678;
@@ -780,7 +756,7 @@ h1, h2, p, figure { margin: 0; }
 .earned { color: var(--forest); font-size: 12px; font-weight: 800; }
 .feedback-copy p { margin-top: 3px; color: #3e5345; font-size: 13px; line-height: 1.48; }
 .feedback.bad .feedback-copy p { color: #68493c; }
-.action-row { display: flex; justify-content: flex-end; gap: 8px; margin-top: 8px; }
+.action-row { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; margin-top: 8px; }
 .result-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
 .result-item { padding: 9px 11px; border: 1px solid #d9e0d2; border-radius: 9px; background: #f5f7ed; }
 .result-item strong { display: block; margin-top: 3px; color: var(--forest); font-size: 22px; }
@@ -827,8 +803,6 @@ h1, h2, p, figure { margin: 0; }
   .game { grid-template-columns: minmax(0, 1.2fr) minmax(290px, 1fr); gap: 10px; }
   .stage-header { padding-inline: 9px; }
   .view-panel { margin-inline: 8px; }
-  .stage-heading { gap: 6px; }
-  .stage-heading p { display: none; }
   .view-btn { padding-inline: 6px; }
   .sensor-status { display: none; }
 }
@@ -847,8 +821,8 @@ h1, h2, p, figure { margin: 0; }
   .brand-name { font-size: 14px; }
   .brand-mark { width: 36px; height: 36px; }
   .brand-caption, .restart-text, .selfie-btn span, .progress > span { display: none; }
-  .stage-index { display: none; }
-  .stage-heading h2 { font-size: 14px; }
+  .stage-header h2 { font-size: 14px; }
+  .turn-btn .icon { display: none; }
   .sensor-status { display: none; }
   .score { gap: 4px; }
   .score strong { font-size: 17px; }
@@ -879,12 +853,12 @@ h1, h2, p, figure { margin: 0; }
   <symbol id="i-player" viewBox="0 0 24 24"><circle cx="12" cy="7" r="3"/><path d="M6 20v-2.5a6 6 0 0 1 12 0V20M4 20h16"/></symbol>
   <symbol id="i-water" viewBox="0 0 24 24"><path d="M3 17h18l-2 4H5zm9 0V8m0 0c-1-4-6-4-7 0m7 0c1-4 6-4 7 0M4 13h.01m16 0h.01"/></symbol>
   <symbol id="i-garden" viewBox="0 0 24 24"><path d="M12 21V5a2 2 0 0 0-4 0v8H6V9a2 2 0 0 0-4 0v3a5 5 0 0 0 5 5h1v4m4-7h2a5 5 0 0 0 5-5V7a2 2 0 0 0-4 0v2h-3m-7 12h10"/></symbol>
-  <symbol id="i-station" viewBox="0 0 24 24"><path d="M5 21h15m-8 0v-3m-7-4h10m-1.5-3.5-5-5 3-3 5 5zM15 8l1.5-1.5m-.8 4.5A5 5 0 0 1 15 18H8"/></symbol>
-  <symbol id="i-telescope" viewBox="0 0 24 24"><path d="m3 10 15-6 2 5-15 6zm13-5 2 5m-7 3-4 8m4-8 5 8m-5-7v7M2 12l2 4"/></symbol>
+  <symbol id="i-tree" viewBox="0 0 24 24"><path d="m12 3-6 7h3l-6 7h18l-6-7h3zM12 17v4"/></symbol>
+  <symbol id="i-bridge" viewBox="0 0 24 24"><path d="M3 11h18M5 11V7m5 4V7m4 4V7m5 4V7M3 18h4a5 5 0 0 1 10 0h4M3 21c2 0 3-1 4.5-1s2.5 1 4.5 1 3-1 4.5-1 2.5 1 4.5 1"/></symbol>
   <symbol id="i-play" viewBox="0 0 24 24"><path d="m3 9 9-6 9 6zm2 11h14M12 9v11M6 9v8m12-8v8M3 20h18"/></symbol>
-  <symbol id="i-gate" viewBox="0 0 24 24"><path d="M9 16C7 9 12 4 19 3c-1 7-5 12-10 13zM9 9H6l-3 5 5-1m7 0v4l-5 3 1-4m-3 2-4 4m1-5-3 3"/><circle cx="14" cy="8" r="1.1"/></symbol>
-  <symbol id="i-pond" viewBox="0 0 24 24"><path d="M12 3c2 4 6.5 8 6.5 12a6.5 6.5 0 1 1-13 0c0-4 4.5-8 6.5-12zm-3 12c0 1.7 1.4 3 3 3"/></symbol>
-  <symbol id="i-power" viewBox="0 0 24 24"><path d="M8 5h8v16H8zM10 5V2h4v3m-2 4-2 4h4l-2 4"/></symbol>
+  <symbol id="i-bench" viewBox="0 0 24 24"><path d="M5 6h14v7H5zM5 9.5h14M3 16h18m-15 0v4m12-4v4"/></symbol>
+  <symbol id="i-pond" viewBox="0 0 24 24"><ellipse cx="12" cy="12" rx="9" ry="6.5"/><path d="M6 12c1.5 0 2-1.5 4-1.5s2.5 1.5 4 1.5 2-1.5 4-1.5M9 15c1.5 0 2-1 3.5-1s2 1 3.5 1"/></symbol>
+  <symbol id="i-duck" viewBox="0 0 24 24"><path d="M3 13c2 1.5 4.5 1.5 6.5.3 1.3-.8 1.5-2.4 1.7-4A3.7 3.7 0 0 1 18.5 9l2.5 1.2-3 1.7c-.4 4.1-3.6 7.1-8.1 7.1C6 19 3.7 16.7 3 13zm4 2.5c1.5 1 4 1.2 5.5.2"/><circle cx="16" cy="8.5" r=".6"/></symbol>
   <symbol id="compass-rose" viewBox="0 0 110 110">
     <circle cx="55" cy="55" r="32" fill="#f5f4e5" fill-opacity=".83" stroke="#82997d"/>
     <circle cx="55" cy="55" r="25" fill="none" stroke="#aebea4" stroke-dasharray="1 3"/>
@@ -892,11 +866,11 @@ h1, h2, p, figure { margin: 0; }
     <path d="m55 28 6 27-6 26-6-26z" fill="#f8f4df" stroke="#647c65"/>
     <path d="m55 28 6 27H49z" fill="#a64b32"/>
     <circle cx="55" cy="55" r="2.2" fill="#385946"/>
-    <g font-family="ui-monospace, Menlo, monospace" font-size="12" font-weight="800" text-anchor="middle" fill="#365543">
-      <text x="55" y="18" fill="#973e2b">N</text><text x="55" y="101">S</text><text x="11" y="59">W</text><text x="99" y="59">E</text>
+    <g font-size="14" font-weight="800" text-anchor="middle" fill="#365543">
+      <text x="55" y="18" fill="#973e2b">北</text><text x="55" y="101">南</text><text x="11" y="59">西</text><text x="99" y="59">東</text>
     </g>
-    <g font-family="ui-monospace, Menlo, monospace" font-size="8" font-weight="750" text-anchor="middle" fill="#456251">
-      <text x="23" y="26">NW</text><text x="87" y="26">NE</text><text x="23" y="90">SW</text><text x="87" y="90">SE</text>
+    <g font-size="11" font-weight="750" text-anchor="middle" fill="#456251">
+      <text x="23" y="26">西北</text><text x="87" y="26">東北</text><text x="23" y="91">西南</text><text x="87" y="91">東南</text>
     </g>
   </symbol>
   <symbol id="atlas-contours" viewBox="0 0 640 450">
@@ -924,26 +898,26 @@ h1, h2, p, figure { margin: 0; }
         <span class="brand-mark"><svg class="icon" aria-hidden="true"><use href="#i-compass"/></svg></span>
         <span>
           <span class="brand-name">方向探險站</span>
-          <span class="brand-caption mono">DIRECTION FIELD LAB</span>
+          <span class="brand-caption">位置、方向和路線</span>
         </span>
       </button>
       <div class="mast-actions">
         <div class="edition" id="introEdition">
-          <svg class="icon" aria-hidden="true"><use href="#i-tablet"/></svg>iPad 橫向版
+          <svg class="icon" aria-hidden="true"><use href="#i-tablet"/></svg>橫放 iPad
         </div>
         <div class="game-toolbar" id="gameToolbar" hidden>
           <div class="progress">
-            <span>進度</span><strong id="progressLabel" class="mono">1 / 8</strong>
+            <span>題目</span><strong id="progressLabel" class="mono">1 / 8</strong>
             <div class="progress-track" id="progressTrack" aria-hidden="true"></div>
           </div>
           <div class="score">
-            <span>分數</span><strong class="mono" id="scoreLabel">000</strong>
+            <span id="scoreCaption">分數</span><strong class="mono" id="scoreLabel">0</strong>
           </div>
-          <button class="quiet-btn" id="restartBtn" type="button" aria-label="重新生成一局">
-            <svg class="icon" aria-hidden="true"><use href="#i-restart"/></svg><span class="restart-text">重開</span>
+          <button class="quiet-btn" id="restartBtn" type="button" aria-label="重新開始">
+            <svg class="icon" aria-hidden="true"><use href="#i-restart"/></svg><span class="restart-text">重玩</span>
           </button>
         </div>
-        <button class="quiet-btn selfie-btn" id="cameraBtn" type="button" aria-label="自拍背景" aria-controls="cameraBackdrop" aria-pressed="false" title="用前鏡頭把自己顯示在整頁背景">
+        <button class="quiet-btn selfie-btn" id="cameraBtn" type="button" aria-label="自拍背景" aria-controls="cameraBackdrop" aria-pressed="false" title="用前鏡頭，在背景看見自己">
           <svg class="icon" aria-hidden="true"><use href="#i-camera"/></svg><span id="cameraBtnText">自拍背景</span>
         </button>
       </div>
@@ -952,29 +926,29 @@ h1, h2, p, figure { margin: 0; }
 
   <section class="frame welcome" id="introScreen" aria-labelledby="welcomeTitle">
     <div class="welcome-copy">
-      <p class="eyebrow">方位探索練習簿</p>
-      <h1 id="welcomeTitle" tabindex="-1">認清方向，<br><span>出發探險。</span></h1>
-      <p class="welcome-lead">從俯視地圖走進第一身 AR，<br>用 8 道任務練習八方位、轉向和路線。</p>
+      <p class="eyebrow">公園探險</p>
+      <h1 id="welcomeTitle" tabindex="-1">一起來<br><span>找方向！</span></h1>
+      <p class="welcome-lead">先答 8 題找方向。<br>答完可選做 4 題特別挑戰。</p>
       <fieldset class="difficulty">
         <legend>選擇玩法</legend>
         <div class="difficulty-pick">
           <button class="difficulty-btn active" id="introTeachingBtn" aria-pressed="true" type="button">
             <span class="difficulty-icon"><svg class="icon" aria-hidden="true"><use href="#i-book"/></svg></span>
-            <span><strong>教學模式</strong><small>提示與推理解說</small></span>
+            <span><strong>練習</strong><small>有提示和講解</small></span>
             <span class="selection" aria-hidden="true"></span>
           </button>
           <button class="difficulty-btn" id="introChallengeBtn" aria-pressed="false" type="button">
             <span class="difficulty-icon"><svg class="icon" aria-hidden="true"><use href="#i-flag"/></svg></span>
-            <span><strong>挑戰模式</strong><small>獨立完成八題</small></span>
+            <span><strong>自己答</strong><small>答完看答案</small></span>
             <span class="selection" aria-hidden="true"></span>
           </button>
         </div>
       </fieldset>
       <div class="welcome-action">
         <button class="primary-btn start-btn" id="startBtn" type="button">
-          開始探險<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>
+          開始答題<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>
         </button>
-        <p class="welcome-note"><span>可用按鈕操作第一身視角</span><span>頂部可開啟自拍背景</span></p>
+        <p class="welcome-note">按「自拍背景」，<br>就能在背景看見自己。</p>
       </div>
     </div>
 
@@ -999,37 +973,36 @@ h1, h2, p, figure { margin: 0; }
           <g class="map-token" data-landmark="garden" transform="translate(178 176)">
             <circle r="25" class="token-pin"/><use href="#i-garden" x="-14" y="-14" width="28" height="28" class="token-icon"/>
             <rect x="-42" y="30" width="84" height="23" rx="6" class="token-label"/>
-            <text y="46" text-anchor="middle" class="token-name">仙人掌園</text>
+            <text y="46" text-anchor="middle" class="token-name">花園</text>
           </g>
           <g class="map-token" data-landmark="water" transform="translate(459 156)">
             <circle r="25" class="token-pin"/><use href="#i-water" x="-14" y="-14" width="28" height="28" class="token-icon"/>
             <rect x="-27" y="30" width="54" height="23" rx="6" class="token-label"/>
             <text y="46" text-anchor="middle" class="token-name">噴泉</text>
           </g>
-          <g class="map-token" data-landmark="telescope" transform="translate(475 343)">
-            <circle r="25" class="token-pin"/><use href="#i-telescope" x="-14" y="-14" width="28" height="28" class="token-icon"/>
+          <g class="map-token" data-landmark="bridge" transform="translate(475 343)">
+            <circle r="25" class="token-pin"/><use href="#i-bridge" x="-14" y="-14" width="28" height="28" class="token-icon"/>
             <rect x="-34" y="30" width="68" height="23" rx="6" class="token-label"/>
-            <text y="46" text-anchor="middle" class="token-name">觀星台</text>
+            <text y="46" text-anchor="middle" class="token-name">小橋</text>
           </g>
           <g class="map-token token-player" transform="translate(321 260)">
             <circle r="30" class="token-pin"/><use href="#i-player" x="-16" y="-16" width="32" height="32" class="token-icon"/>
             <rect x="-35" y="35" width="70" height="23" rx="6" class="token-label"/>
-            <text y="51" text-anchor="middle" class="token-name">出發點</text>
+            <text y="51" text-anchor="middle" class="token-name">你</text>
           </g>
           <use href="#compass-rose" x="505" y="28" width="104" height="104"/>
           <path d="M35 413v7h67v-7m-45 2v5m23-5v5" fill="none" stroke="#56775b"/>
-          <text x="35" y="438" class="chart-text">EXPEDITION 01</text>
           <g fill="none" stroke="#647f66" stroke-opacity=".7">
             <path d="M26 26h12m-12 0v12m588-12h-12m12 0v12M26 444h12m-12 0v-12m588 12h-12m12 0v-12"/>
             <path d="M549 422h44m-22-4v8M53 263h19m-9.5-9.5v19"/>
           </g>
         </svg>
-        <div class="cover-title"><strong>探索地圖</strong><small class="mono">FIELD MAP / 01</small></div>
+        <div class="cover-title"><strong>公園地圖</strong><small>上方是北</small></div>
       </div>
       <figcaption class="cover-meta">
-        <div><b class="mono">08</b> 道任務</div>
-        <div><b class="mono">02</b> 種視角</div>
-        <div><b class="mono">06</b> 個隨機地標</div>
+        <div><b class="mono">8</b> 題</div>
+        <div><b class="mono">8</b> 個方向</div>
+        <div><b class="mono">6</b> 個景物</div>
       </figcaption>
     </figure>
   </section>
@@ -1037,16 +1010,13 @@ h1, h2, p, figure { margin: 0; }
   <div class="frame game" id="gameScreen" hidden>
     <section class="stage" aria-labelledby="stageLabel">
       <header class="stage-header">
-        <div class="stage-heading">
-          <span class="stage-index mono" id="viewIndex" aria-hidden="true">01</span>
-          <div><h2 id="stageLabel">觀察區</h2><p class="mono">FIELD VIEW</p></div>
-        </div>
-        <div class="view-switch" role="group" aria-label="切換觀察視角">
+        <h2 id="stageLabel">看一看</h2>
+        <div class="view-switch" role="group" aria-label="選擇怎樣看">
           <button class="view-btn active" id="mapModeBtn" aria-controls="mapStage" aria-pressed="true" type="button">
-            <svg class="icon" aria-hidden="true"><use href="#i-map"/></svg>俯視地圖
+            <svg class="icon" aria-hidden="true"><use href="#i-map"/></svg>看地圖
           </button>
           <button class="view-btn" id="arModeBtn" aria-controls="arStage" aria-pressed="false" type="button">
-            <svg class="icon" aria-hidden="true"><use href="#i-view"/></svg>第一身 AR
+            <svg class="icon" aria-hidden="true"><use href="#i-view"/></svg>轉身看
           </button>
         </div>
       </header>
@@ -1054,8 +1024,8 @@ h1, h2, p, figure { margin: 0; }
       <div class="view-panel" id="mapStage">
         <div class="map-board">
           <svg class="map-svg" viewBox="0 0 640 420" role="img" aria-labelledby="mapSvgTitle mapSvgDesc">
-            <title id="mapSvgTitle">俯視探索地圖</title>
-            <desc id="mapSvgDesc">地圖上方是北，人物在中心。每格代表 100 m。</desc>
+            <title id="mapSvgTitle">公園地圖</title>
+            <desc id="mapSvgDesc">地圖上方是北，你在地圖中間。每格是 100 m。</desc>
             <defs>
               <pattern id="game-grid" width="44" height="44" x="320" y="210" patternUnits="userSpaceOnUse">
                 <path d="M0 44V0h44" fill="none" stroke="#789678" stroke-opacity=".45"/>
@@ -1065,9 +1035,7 @@ h1, h2, p, figure { margin: 0; }
             <use href="#atlas-contours" width="640" height="420"/>
             <rect x="13" y="13" width="614" height="394" fill="url(#game-grid)" stroke="#638068" stroke-opacity=".4"/>
             <path d="M320 13v394M13 210h614" fill="none" stroke="#759278" stroke-opacity=".5"/>
-            <rect x="24" y="24" width="85" height="23" rx="4" fill="#f4f3e5" stroke="#aebfa4"/>
-            <text x="34" y="39" class="chart-text">FIELD GRID</text>
-            <use href="#compass-rose" x="518" y="23" width="100" height="100"/>
+            <use href="#compass-rose" x="506" y="22" width="110" height="110"/>
             <g class="map-scale" transform="translate(27 378)" aria-hidden="true">
               <rect x="-6" y="-8" width="56" height="30" rx="4"/>
               <path d="M0 -3v7h44v-7"/>
@@ -1078,7 +1046,7 @@ h1, h2, p, figure { margin: 0; }
           </svg>
         </div>
         <div class="map-legend">
-          <span><i class="legend-dot" aria-hidden="true"></i>人物固定在中心</span>
+          <span><i class="legend-dot" aria-hidden="true"></i>你在地圖中間</span>
           <span>每格 <b class="mono">100 m</b></span>
           <span class="legend-north"><svg class="icon" aria-hidden="true"><use href="#i-up"/></svg>上方為北</span>
         </div>
@@ -1087,8 +1055,8 @@ h1, h2, p, figure { margin: 0; }
       <div class="view-panel ar-view" id="arStage" hidden>
         <div class="ar-instrument">
           <div class="heading-readout">
-            <strong id="arHeadingNumber" class="mono">000°</strong>
-            <span id="arHeadingSubtitle">遊戲面向</span>
+            <span>現在面向</span>
+            <strong id="arHeadingName">北方</strong>
           </div>
           <div class="compass-strip" id="compassStrip" aria-hidden="true">
             <div id="compassScale"></div><div class="hud-center-marker"></div>
@@ -1109,50 +1077,69 @@ h1, h2, p, figure { margin: 0; }
           </svg>
           <div class="scene-overlay" aria-hidden="true"></div>
           <div class="scene-reticle" aria-hidden="true"></div>
-          <span class="scene-chip">模擬視角 · 直線距離</span>
+          <span class="scene-chip">離你多遠？</span>
           <div class="ar-marker-layer" id="arMarkerLayer"></div>
-          <span class="facing-badge" id="facingBadge">面向北</span>
         </div>
-        <div class="turn-pad" role="group" aria-label="手動轉向">
-          <button class="turn-btn" data-turn="-90" type="button"><svg class="icon" aria-hidden="true"><use href="#i-turn-left"/></svg>左轉 90°</button>
-          <button class="turn-btn" data-turn="-45" type="button"><svg class="icon" aria-hidden="true"><use href="#i-turn-left"/></svg>左轉 45°</button>
-          <button class="turn-btn" data-turn="45" type="button">右轉 45°<svg class="icon" aria-hidden="true"><use href="#i-turn-right"/></svg></button>
-          <button class="turn-btn" data-turn="90" type="button">右轉 90°<svg class="icon" aria-hidden="true"><use href="#i-turn-right"/></svg></button>
-        </div>
-        <div class="ar-tools" role="group" aria-label="選用方向感應器">
-          <button class="quiet-btn" id="sensorBtn" aria-pressed="false" type="button">
-            <svg class="icon" aria-hidden="true"><use href="#i-compass"/></svg><span id="sensorBtnText">啟用感應</span>
+        <div class="turn-pad" role="group" aria-label="用按鈕轉身">
+          <button class="turn-btn" data-turn="-90" type="button">
+            <svg class="icon" aria-hidden="true"><use href="#i-turn-left"/></svg><span>左轉 <small>一個直角</small></span>
           </button>
-          <button class="quiet-btn" id="calibrateBtn" type="button" disabled title="把目前持機方向設為遊戲北">設為遊戲北</button>
-          <span class="sensor-status" id="sensorStatus">按鈕控制轉向</span>
+          <button class="turn-btn" data-turn="-45" type="button">
+            <svg class="icon" aria-hidden="true"><use href="#i-turn-left"/></svg><span>左轉 <small>半個直角</small></span>
+          </button>
+          <button class="turn-btn" data-turn="45" type="button">
+            <span>右轉 <small>半個直角</small></span><svg class="icon" aria-hidden="true"><use href="#i-turn-right"/></svg>
+          </button>
+          <button class="turn-btn" data-turn="90" type="button">
+            <span>右轉 <small>一個直角</small></span><svg class="icon" aria-hidden="true"><use href="#i-turn-right"/></svg>
+          </button>
+        </div>
+        <div class="ar-tools" role="group" aria-label="轉動 iPad">
+          <button class="quiet-btn" id="sensorBtn" aria-pressed="false" type="button">
+            <svg class="icon" aria-hidden="true"><use href="#i-compass"/></svg><span id="sensorBtnText">轉動 iPad</span>
+          </button>
+          <button class="quiet-btn" id="calibrateBtn" type="button" disabled title="把你面向的方向當作遊戲的北方">定北方</button>
+          <span class="sensor-status" id="sensorStatus">用按鈕轉身。</span>
         </div>
       </div>
     </section>
 
     <section class="question-panel" id="questionPanel" aria-labelledby="questionTitle">
       <div class="question-meta">
-        <span class="mission-number">任務 <b class="mono" id="missionNumber">01</b></span>
-        <span id="questionModeHint">俯視 · 人物與景物</span>
+        <span class="mission-number">第 <b class="mono" id="missionNumber">1</b> 題</span>
+        <span id="questionModeHint">我和景物</span>
       </div>
       <h1 class="question-title" id="questionTitle" tabindex="-1">準備開始</h1>
       <p class="question-note" id="questionNote"></p>
       <div class="options" id="optionsPanel">
-        <div class="options-head"><h2>選擇答案</h2><span id="classModeLabel">教學模式</span></div>
+        <div class="options-head"><h2>選一個答案</h2><span id="classModeLabel">練習</span></div>
         <div class="answer-grid" id="answerGrid"></div>
       </div>
       <div class="hint-wrap" id="hintWrap">
         <button class="hint-btn" id="hintBtn" aria-controls="hintText" aria-expanded="false" type="button">
           <svg class="icon" aria-hidden="true"><use href="#i-bulb"/></svg>
-          思考提示 <small>· 使用後答對得 80 分</small>
+          看提示 <small>用提示後答對有 80 分</small>
         </button>
         <p class="hint-text" id="hintText" tabindex="-1" hidden></p>
       </div>
       <div class="options" id="resultsPanel" hidden>
-        <div class="options-head"><h2>本局紀錄</h2></div>
+        <div class="options-head"><h2>你的分數</h2></div>
         <div class="result-grid" id="resultsGrid"></div>
       </div>
-      <div class="feedback" id="feedbackBox" hidden>
+      <section class="challenge-offer" id="challengeOffer" aria-labelledby="challengeOfferTitle" hidden>
         <div class="feedback-copy">
+          <h2 id="challengeOfferTitle">要做特別挑戰嗎？</h2>
+          <p>再做 4 題，選出先走和後走的方向。</p>
+        </div>
+        <div class="action-row">
+          <button class="quiet-btn" id="finishBtn" type="button">完成</button>
+          <button class="primary-btn" id="specialBtn" type="button">
+            做特別挑戰<svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>
+          </button>
+        </div>
+      </section>
+      <div class="feedback" id="feedbackBox" hidden>
+        <div class="feedback-copy" id="feedbackCopy">
           <div class="feedback-heading">
             <strong id="feedbackTitle" tabindex="-1"></strong>
             <span class="earned mono" id="earned"></span>
@@ -1160,7 +1147,7 @@ h1, h2, p, figure { margin: 0; }
           <p id="feedbackText"></p>
         </div>
         <div class="action-row">
-          <button class="quiet-btn" id="chooseModeBtn" type="button" hidden>選擇玩法</button>
+          <button class="quiet-btn" id="chooseModeBtn" type="button" hidden>回首頁</button>
           <button class="primary-btn" id="nextBtn" type="button">
             <span id="nextBtnText">下一題</span><svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg>
           </button>
@@ -1186,23 +1173,23 @@ const DIRS=[
 ];
 const LANDMARKS=[
   {id:'water',name:'噴泉'},
-  {id:'garden',name:'仙人掌園'},
-  {id:'station',name:'研究站'},
-  {id:'telescope',name:'觀星台'},
+  {id:'garden',name:'花園'},
+  {id:'tree',name:'大樹'},
+  {id:'bridge',name:'小橋'},
   {id:'play',name:'遊樂場'},
-  {id:'gate',name:'太空閘'},
-  {id:'pond',name:'水培池'},
-  {id:'power',name:'能源站'}
+  {id:'bench',name:'長椅'},
+  {id:'pond',name:'池塘'},
+  {id:'duck',name:'鴨子'}
 ];
-const TURN_CHOICES=[
-  {id:'-135',label:'左轉 135°'}, {id:'-90',label:'左轉 90°'}, {id:'-45',label:'左轉 45°'},
-  {id:'45',label:'右轉 45°'}, {id:'90',label:'右轉 90°'}, {id:'135',label:'右轉 135°'}
-];
-const PLAYER = { id: 'player', name: '人物', x: 0, y: 0 };
+const PLAYER = { id: 'player', name: '你', x: 0, y: 0 };
 const SVG_NS = 'http://www.w3.org/2000/svg';
 const MAP_STEP = 44;
 const MAP_CENTER = { x: 320, y: 210 };
 const METRES_PER_CELL = 100;
+const GROUP_SIZE = 4;
+const MAIN_COUNT = GROUP_SIZE * 2;
+const POINTS_PER_QUESTION = 100;
+const GROUP_LABELS = ['我和景物', '景物和景物', '特別挑戰'];
 const metres = cells => `${Math.round(cells * METRES_PER_CELL)} m`;
 const ui = Object.fromEntries([...document.querySelectorAll('[id]')].map(element => [element.id, element]));
 const viewButtons = [ui.mapModeBtn, ui.arModeBtn];
@@ -1226,7 +1213,6 @@ let sensorSource = '';
 
 const normalize=a=>(a%360+360)%360;
 const signedAngle=a=>{let d=normalize(a);return d>180?d-360:d;};
-const pick=a=>a[Math.floor(Math.random()*a.length)];
 function shuffle(array){
   const a=[...array];
   for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}
@@ -1244,31 +1230,13 @@ function where(id) {
   return id === 'player' ? PLAYER : state.world.find(landmark => landmark.id === id);
 }
 function dirOptions(correct){
-  return shuffle([dir(correct),...shuffle(DIRS.filter(d=>d.id!==correct)).slice(0,3)]).map(d=>({id:d.id,label:d.name,small:d.id}));
+  return shuffle([dir(correct),...shuffle(DIRS.filter(d=>d.id!==correct)).slice(0,3)]).map(d=>({id:d.id,label:d.name+'方'}));
 }
-function landmarkOptions(correct){
-  return shuffle([where(correct),...shuffle(state.world.filter(l=>l.id!==correct)).slice(0,3)])
-   .map(l=>({id:l.id,label:l.name}));
+function landmarkOptions(from, to) {
+  const distractors = shuffle(state.world.filter(item => item.id !== from.id && item.id !== to.id)).slice(0, 3);
+  return shuffle([to, ...distractors]).map(item => ({ id: item.id, label: item.name }));
 }
-function turnOptions(correct){
-  return shuffle([TURN_CHOICES.find(c=>c.id===String(correct)),
-    ...shuffle(TURN_CHOICES.filter(c=>c.id!==String(correct))).slice(0,3)]);
-}
-function routeOptions(target) {
-  const horizontal = metres(Math.abs(target.x));
-  const vertical = metres(Math.abs(target.y));
-  const xDir = target.x > 0 ? '東' : '西';
-  const yDir = target.y > 0 ? '南' : '北';
-  const wrongX = target.x > 0 ? '西' : '東';
-  const wrongY = target.y > 0 ? '北' : '南';
-  const route = (id, first, second) => ({
-    id, label: `向${first}走 ${horizontal}\n再向${second}走 ${vertical}`
-  });
-  return shuffle([
-    route('correct', xDir, yDir), route('wrong-x', wrongX, yDir),
-    route('wrong-y', xDir, wrongY), route('wrong-both', wrongX, wrongY)
-  ]);
-}
+
 function worldGenerate(){
   const positions=shuffle(DIRS).slice(0,6);
   const length=2+Math.floor(Math.random()*2);
@@ -1277,76 +1245,104 @@ function worldGenerate(){
     return {...landmark,x:p.dx*length,y:p.dy*length,directionId:p.id};
   });
 }
-function generateQuestions(){
-  const shuffled=shuffle(state.world);
-  const exactPairs=[];
-  for(const first of shuffled)for(const second of shuffled){
-    if(first.id===second.id)continue;
-    const dx=second.x-first.x,dy=second.y-first.y;
-    if(dx===0||dy===0||Math.abs(dx)===Math.abs(dy))exactPairs.push([first,second]);
+
+function landmarkPairs() {
+  const pairs = [];
+  for (const from of state.world) {
+    const neighbors = state.world.filter(to => to.id !== from.id).map(to => ({
+      to, direction: bearing(from, to)
+    }));
+    for (const { to, direction } of neighbors) {
+      const dx = to.x - from.x;
+      const dy = to.y - from.y;
+      if (dx && dy && Math.abs(dx) !== Math.abs(dy)) continue;
+      pairs.push({
+        from, to, direction,
+        key: [from.id, to.id].sort().join('/'),
+        unambiguous: neighbors.filter(item => item.direction === direction).length === 1
+      });
+    }
   }
-  const [a,b]=pick(exactPairs);
-  const secondPairs=exactPairs.filter(([x,y])=>x.id!==a.id||y.id!==b.id);
-  const [c,d]=pick(secondPairs.length?secondPairs:exactPairs);
-  const [e,f]=shuffle(shuffled.filter(x=>x.id!==a.id&&x.id!==b.id)).slice(0,2);
-  const routeTarget=pick(state.world.filter(x=>x.x!==0&&x.y!==0));
-  const routeCorner={x:routeTarget.x,y:0};
-  const routeStep=metres(Math.abs(routeTarget.x));
-  const pairDir=bearing(where(a.id),where(b.id));
-  const cdDir=bearing(where(c.id),where(d.id));
-  const returnDir=bearing(where(e.id),where('player'));
-  const arTarget=pick(state.world.filter(x=>x.id!==f.id));
-  // The chosen hypothetical starting bearing always needs a 45, 90 or 135 degree turn.
-  const turn=pick([-135,-90,-45,45,90,135]);
-  const startDir=byAngle(dir(arTarget.directionId).angle-turn);
-  const relTarget=pick(state.world.filter(x=>x.id!==arTarget.id));
-  const relativeAngle=pick([45,90,135,180,225,270,315]);
-  const relFacing=byAngle(dir(relTarget.directionId).angle-relativeAngle);
-  const relativeNames={0:'正前方',45:'右前方',90:'右方',135:'右後方',180:'正後方',225:'左後方',270:'左方',315:'左前方'};
-  const relOptions=shuffle([0,45,90,135,180,225,270,315]).filter(x=>x!==relativeAngle).slice(0,3);
-  const relAnswers=shuffle([relativeAngle,...relOptions].map(x=>({id:String(x),label:relativeNames[x],small:`${x}°`})));
-  return [
-    {id:1,mode:'map',skill:'人物 → 景物',type:'object',title:`在人物的「${dirName(a.directionId)}」方，是哪個景物？`,
-      note:'先定北，再從中心向指定方向看。',hint:'把人物當成指南針中心，從上方的北開始找。',
-      options:landmarkOptions(a.id),correct:a.id,
-      explanation:`人物在中心，${a.name} 位於人物的${dirName(a.directionId)}方。`,paths:[['player',a.id]]},
-    {id:2,mode:'map',skill:'景物 ↔ 景物',type:'direction',title:`以「${a.name}」為起點，「${b.name}」在它的哪個方向？`,
-      note:'先站到題目指定的景物，再判斷方向。',hint:`想像先站在${a.name}，再畫箭嘴指向${b.name}。`,
-      options:dirOptions(pairDir),correct:pairDir,
-      explanation:`從${a.name}指向${b.name}的箭嘴，整體朝${dirName(pairDir)}。`,paths:[[a.id,b.id]]},
-    {id:3,mode:'map',skill:'雙段路線',type:'direction',title:`由中心先到「${c.name}」，再去「${d.name}」。第二段路朝哪方？`,
-      note:'從第一個景物出發，找出第二段的方向。',hint:`先忽略中心，看看${c.name}到${d.name}的連線。`,
-      options:dirOptions(cdDir),correct:cdDir,
-      explanation:`路線分兩段：中心 → ${c.name} → ${d.name}。第二段由${c.name}到${d.name}，朝${dirName(cdDir)}。`,paths:[['player',c.id],[c.id,d.id]]},
-    {id:4,mode:'map',skill:'反方向推理',type:'direction',title:`假如站在「${e.name}」，要回到中心的人物，應向哪方？`,
-      note:'人物仍在地圖中心；題目是想像從景物回程。',hint:`先找人物到${e.name}的方向，再轉180°。`,
-      options:dirOptions(returnDir),correct:returnDir,
-      explanation:`${e.name}在中心的${dirName(e.directionId)}方，返回中心要轉向相反的${dirName(returnDir)}方。`,paths:[[e.id,'player']]},
-    {id:5,mode:'ar',skill:'第一身定位',type:'direction',title:`由人物看，「${f.name}」在遊戲世界的哪個方位？`,
-      note:'轉動視角，讓景物對準指南條中央。',hint:'把指南條中央對準景物，再看中央的 N／NE／E 等方位。',
-      options:dirOptions(f.directionId),correct:f.directionId,
-      explanation:`${f.name}固定在人物的${dirName(f.directionId)}方。轉動 iPad 或按鈕，只改變看它的角度。`,paths:[['player',f.id]]},
-    {id:6,mode:'ar',skill:'相對轉向',type:'turn',suggestFacing:startDir.id,
-      title:`假設人物面向「${startDir.name}」，要正對「${arTarget.name}」，最短應怎樣轉？`,
-      note:'可先用轉向按鈕，對準題目指定的起始方向。',
-      hint:`目標在${dirName(arTarget.directionId)}方，從${startDir.name}轉到它，順或逆時針哪邊更短？`,
-      options:turnOptions(turn),correct:String(turn),
-      explanation:`起始面向是${startDir.name}，${arTarget.name}在${dirName(arTarget.directionId)}方；最短轉向是${turn<0?'向左':'向右'}${Math.abs(turn)}°。`,paths:[['player',arTarget.id]]},
-    {id:7,mode:'ar',skill:'身體左右方',type:'relative',suggestFacing:relFacing.id,
-      title:`假設人物面向「${relFacing.name}」，「${relTarget.name}」會在身體的哪一邊？`,
-      note:'想像自己面向指定方向，再判斷前、後、左、右。',
-      hint:`假想自己的正前方是${relFacing.name}，然後看${relTarget.name}相對哪一側。`,
-      options:relAnswers,correct:String(relativeAngle),
-      explanation:`人物面向${relFacing.name}時，${relTarget.name}位於${relativeNames[relativeAngle]}。位置沒變，變的是自己的面向。`,paths:[['player',relTarget.id]]},
-    {id:8,mode:'ar',skill:'兩步路線',type:'route',title:`從中心前往「${routeTarget.name}」，哪一條兩段路線能走到它？`,
-      note:'切到俯視地圖，用比例尺讀出兩段路程。',
-      hint:`先看目標在東面還是西面，再看它在北面還是南面。兩段各走 ${routeStep}。`,
-      options:routeOptions(routeTarget),correct:'correct',
-      explanation:`${routeTarget.name}在中心的${dirName(routeTarget.directionId)}方。先走 ${routeStep}，轉 90° 後再走 ${routeStep}。`,paths:[['player',routeCorner],[routeCorner,routeTarget.id]]}
-  ];
+  return shuffle(pairs);
+}
+
+function positionQuestion(from, to, findLandmark, mode = 'map') {
+  const direction = bearing(from, to);
+  const directionName = dirName(direction) + '方';
+  const fromPlayer = from.id === PLAYER.id;
+  const reference = fromPlayer ? '你的位置' : from.name;
+  const belonging = fromPlayer ? '你的' : from.name + '的';
+  const note = fromPlayer ? (mode === 'ar' ? '用左轉或右轉找一找。' : '地圖的上方是北。') : `先在地圖上找${from.name}。`;
+  const hint = findLandmark
+    ? (mode === 'ar' ? `面向${directionName}，看看畫面中間。` : `由${reference}向${directionName}看。`)
+    : (mode === 'ar' ? `讓${to.name}在畫面中間，再看上方的指南針。` : `由${reference}向${to.name}看。`);
+  return {
+    mode, note, hint,
+    title: findLandmark ? `${belonging}${directionName}有甚麼？` : `${to.name}在${belonging}哪一方？`,
+    options: findLandmark ? landmarkOptions(from, to) : dirOptions(direction),
+    correct: findLandmark ? to.id : direction,
+    explanation: `${to.name}在${belonging}${directionName}。`,
+    paths: [[from.id, to.id]]
+  };
+}
+
+const routeId = (first, second) => `${first}/${second}`;
+
+function routeQuestion({ from, to, direction: second }) {
+  const first = from.directionId;
+  const [wrongFirst, wrongSecond] = shuffle(DIRS.filter(item => item.id !== first && item.id !== second));
+  const choices = [[first, second], [second, first], [wrongFirst.id, second], [first, wrongSecond.id]];
+  const options = shuffle(choices.map(([start, end]) => ({
+    id: routeId(start, end),
+    label: `先向${dirName(start)}方走\n再向${dirName(end)}方走`
+  })));
+  const firstDistance = metres(Math.hypot(from.x, from.y));
+  const secondDistance = metres(Math.hypot(to.x - from.x, to.y - from.y));
+  return {
+    mode: 'map',
+    title: `先到${from.name}，再到${to.name}。\n先向哪一方走？再向哪一方走？`,
+    note: '由地圖中間的「你」出發。',
+    hint: `先由「你」看${from.name}，再由${from.name}看${to.name}。`,
+    options,
+    correct: routeId(first, second),
+    explanation: `先向${dirName(first)}方走 ${firstDistance}，再向${dirName(second)}方走 ${secondDistance}。`,
+    paths: [[PLAYER.id, from.id], [from.id, to.id]]
+  };
+}
+
+function generateQuestions() {
+  const personal = shuffle(state.world).slice(0, GROUP_SIZE).map((to, index) =>
+    positionQuestion(PLAYER, to, index % 2 === 0, index < GROUP_SIZE / 2 ? 'map' : 'ar')
+  );
+  const pairs = landmarkPairs();
+  const used = new Set();
+  const takePair = (matches = () => true) => {
+    const pair = pairs.find(item => !used.has(item.key) && matches(item));
+    used.add(pair.key);
+    return pair;
+  };
+  // Reserve questions whose direction identifies exactly one landmark.
+  const findPairs = Array.from({ length: GROUP_SIZE / 2 }, () => takePair(pair => pair.unambiguous));
+  const between = findPairs.flatMap(({ from, to }) => {
+    const directionPair = takePair();
+    return [
+      positionQuestion(from, to, true),
+      positionQuestion(directionPair.from, directionPair.to, false)
+    ];
+  });
+  const usedOrders = new Set();
+  const routes = Array.from({ length: GROUP_SIZE }, () => {
+    const pair = takePair(({ from, direction }) => !usedOrders.has(routeId(from.directionId, direction)));
+    usedOrders.add(routeId(pair.from.directionId, pair.direction));
+    return routeQuestion(pair);
+  });
+  return [...personal, ...between, ...routes];
 }
 const current = () => state.questions[state.index];
-const pad = (number, length = 2) => String(number).padStart(length, '0');
+const isSpecial = () => state.index >= MAIN_COUNT;
+const questionLimit = () => isSpecial() ? state.questions.length : MAIN_COUNT;
+const totalPoints = results => results.reduce((total, result) => total + result.earned, 0);
+const correctCount = results => results.filter(result => result.correct).length;
 
 function svgNode(name, attrs = {}, label) {
   const element = document.createElementNS(SVG_NS, name);
@@ -1409,7 +1405,7 @@ function setDifficulty(difficulty) {
 
 function resetGame() {
   state = {
-    world: worldGenerate(), questions: [], index: 0, score: 0, mode: 'map', heading: 0,
+    world: worldGenerate(), questions: [], index: 0, mode: 'map', heading: 0,
     phase: 'playing', answered: false, hintUsed: false, choice: null, results: [], difficulty: modeChoice
   };
   state.questions = generateQuestions();
@@ -1426,20 +1422,21 @@ function setMode(mode) {
   const isMap = mode === 'map';
   ui.mapStage.hidden = !isMap;
   ui.arStage.hidden = isMap;
-  ui.viewIndex.textContent = isMap ? '01' : '02';
   selectButton(viewButtons[0], isMap);
   selectButton(viewButtons[1], !isMap);
   if (!isMap) renderAR();
 }
 
 function renderProgress() {
-  const finished = state.phase === 'results';
-  ui.progressLabel.textContent = `${finished ? state.questions.length : state.index + 1} / ${state.questions.length}`;
-  ui.scoreLabel.textContent = pad(state.score, 3);
-  ui.progressTrack.replaceChildren(...state.questions.map((_, index) => {
+  const limit = questionLimit();
+  const special = isSpecial();
+  ui.progressLabel.textContent = `${state.index + 1} / ${limit}`;
+  ui.scoreCaption.textContent = special ? '挑戰分數' : '分數';
+  ui.scoreLabel.textContent = totalPoints(special ? state.results.slice(MAIN_COUNT) : state.results);
+  ui.progressTrack.replaceChildren(...Array.from({ length: limit }, (_, index) => {
     const segment = node('span', 'progress-segment');
-    segment.classList.toggle('done', finished || index < state.index || (index === state.index && state.answered));
-    segment.classList.toggle('active', !finished && index === state.index && !state.answered);
+    segment.classList.toggle('done', index < state.results.length);
+    segment.classList.toggle('active', index === state.index && !state.answered);
     return segment;
   }));
 }
@@ -1450,12 +1447,14 @@ function renderQuestion() {
   ui.questionPanel.classList.toggle('is-answered', state.answered);
   ui.optionsPanel.hidden = false;
   ui.resultsPanel.hidden = true;
+  ui.challengeOffer.hidden = true;
+  ui.feedbackCopy.hidden = false;
   ui.chooseModeBtn.hidden = true;
-  ui.missionNumber.textContent = pad(state.index + 1);
-  ui.questionModeHint.textContent = `${question.mode === 'map' ? '俯視' : '第一身 AR'} · ${question.skill}`;
+  ui.missionNumber.textContent = state.index + 1;
+  ui.questionModeHint.textContent = GROUP_LABELS[Math.floor(state.index / GROUP_SIZE)];
   ui.questionTitle.textContent = question.title;
   ui.questionNote.textContent = question.note;
-  ui.classModeLabel.textContent = teaching ? '教學模式' : '挑戰模式';
+  ui.classModeLabel.textContent = teaching ? '練習' : '自己答';
   ui.answerGrid.replaceChildren(...question.options.map((option, index) => {
     const button = node('button', 'answer-btn');
     button.type = 'button';
@@ -1465,7 +1464,6 @@ function renderQuestion() {
     const key = node('span', 'option-key', letter);
     key.setAttribute('aria-hidden', 'true');
     const copy = node('span', 'option-copy', option.label);
-    if (option.small) copy.append(node('small', '', option.small));
     button.append(key, copy);
     if (state.answered && option.id === question.correct) {
       button.classList.add('correct');
@@ -1489,10 +1487,10 @@ function renderQuestion() {
   if (state.answered) {
     const { correct, earned } = state.results[state.results.length - 1];
     ui.feedbackBox.classList.toggle('bad', !correct);
-    ui.feedbackTitle.textContent = correct ? '答對了' : '這題未答對';
+    ui.feedbackTitle.textContent = correct ? '答對了！' : '這題答錯了。';
     ui.earned.textContent = correct ? `+${earned} 分` : '';
-    ui.feedbackText.textContent = teaching ? question.explanation : '綠色選項已標出正確答案。';
-    ui.nextBtnText.textContent = state.index === state.questions.length - 1 ? '查看成績' : '下一題';
+    ui.feedbackText.textContent = teaching ? question.explanation : '綠色的是正確答案。';
+    ui.nextBtnText.textContent = state.index + 1 === questionLimit() ? '看分數' : '下一題';
   }
 }
 
@@ -1502,8 +1500,7 @@ function answer(id) {
   state.answered = true;
   state.choice = id;
   const correct = id === question.correct;
-  const earned = correct ? (state.hintUsed ? 80 : 100) : 0;
-  state.score += earned;
+  const earned = correct ? (state.hintUsed ? 80 : POINTS_PER_QUESTION) : 0;
   state.results.push({ correct, earned });
   renderQuestion();
   renderMap();
@@ -1516,49 +1513,62 @@ function next() {
     resetGame();
     return;
   }
-  if (!state.answered) return;
-  if (state.index === state.questions.length - 1) {
-    showResults();
+  if (state.phase !== 'playing' || !state.answered) return;
+  if (state.index + 1 === questionLimit()) {
+    showResults(!isSpecial());
     return;
   }
+  advanceQuestion();
+}
+
+function advanceQuestion() {
+  state.phase = 'playing';
   state.index++;
   state.answered = false;
   state.hintUsed = false;
   state.choice = null;
-  const question = current();
-  if (question.suggestFacing && !sensorActive && !sensorWaiting) state.heading = dir(question.suggestFacing).angle;
-  setMode(question.mode);
+  setMode(current().mode);
   renderQuestion();
   renderMap();
   renderProgress();
   focusQuestion();
 }
 
-function showResults() {
-  state.phase = 'results';
-  const correct = state.results.filter(result => result.correct).length;
-  const mapRight = state.results.slice(0, 4).filter(result => result.correct).length;
-  const arRight = state.results.slice(4).filter(result => result.correct).length;
-  const summaries = [
-    ['總分', `${state.score} / 800`], ['答對題數', `${correct} / 8`],
-    ['俯視地圖', `${mapRight} / 4`], ['第一身 AR', `${arRight} / 4`]
+function showResults(offerChallenge = false) {
+  state.phase = offerChallenge ? 'offer' : 'results';
+  const special = isSpecial();
+  const mainResults = state.results.slice(0, MAIN_COUNT);
+  const mainPoints = `${totalPoints(mainResults)} / ${MAIN_COUNT * POINTS_PER_QUESTION}`;
+  const mainCorrect = `${correctCount(mainResults)} / ${MAIN_COUNT}`;
+  const specialResults = state.results.slice(MAIN_COUNT);
+  const summaries = special ? [
+    ['挑戰分數', `${totalPoints(specialResults)} / ${GROUP_SIZE * POINTS_PER_QUESTION}`],
+    ['挑戰答對', `${correctCount(specialResults)} / ${GROUP_SIZE}`],
+    ['前 8 題分數', mainPoints], ['前 8 題答對', mainCorrect]
+  ] : [
+    ['總分', mainPoints], ['答對幾題', mainCorrect],
+    [GROUP_LABELS[0], `${correctCount(mainResults.slice(0, GROUP_SIZE))} / ${GROUP_SIZE}`],
+    [GROUP_LABELS[1], `${correctCount(mainResults.slice(GROUP_SIZE))} / ${GROUP_SIZE}`]
   ];
   ui.questionPanel.classList.remove('is-answered');
-  ui.questionModeHint.textContent = '本局完成';
-  ui.questionTitle.textContent = '方向任務完成！';
-  ui.questionNote.textContent = '每次出發，地標和題目都會重新排列。';
+  ui.questionModeHint.textContent = special ? GROUP_LABELS[2] : '答完了';
+  ui.questionTitle.textContent = special ? '特別挑戰完成！' : `${MAIN_COUNT} 題答完了！`;
+  ui.questionNote.textContent = offerChallenge ? '' : '再玩一次會有新題目。';
   ui.optionsPanel.hidden = true;
   ui.hintWrap.hidden = true;
   ui.resultsPanel.hidden = false;
+  ui.challengeOffer.hidden = !offerChallenge;
   ui.resultsGrid.replaceChildren(...summaries.map(([label, value]) => {
     const tile = node('div', 'result-item');
     tile.append(node('span', '', label), node('strong', 'mono', value));
     return tile;
   }));
+  ui.feedbackBox.hidden = offerChallenge;
+  ui.feedbackCopy.hidden = !special;
   ui.feedbackBox.classList.remove('bad');
-  ui.feedbackTitle.textContent = '回看最後一題';
+  ui.feedbackTitle.textContent = '看看怎樣走';
   ui.earned.textContent = '';
-  ui.feedbackText.textContent = '切到俯視地圖，可查看兩段路線的轉折和走向。';
+  ui.feedbackText.textContent = '按「看地圖」可看最後一題的路線。';
   ui.chooseModeBtn.hidden = false;
   ui.nextBtnText.textContent = '再玩一次';
   renderProgress();
@@ -1596,24 +1606,19 @@ function mapToken(item) {
   return token;
 }
 
-function drawRoute(fromRef, toRef) {
-  const fromItem = typeof fromRef === 'string' ? where(fromRef) : fromRef;
-  const toItem = typeof toRef === 'string' ? where(toRef) : toRef;
-  const from = mapPosition(fromItem);
-  const to = mapPosition(toItem);
+function drawRoute(fromId, toId) {
+  const from = mapPosition(where(fromId));
+  const to = mapPosition(where(toId));
   const distance = Math.hypot(to.x - from.x, to.y - from.y);
   const dx = (to.x - from.x) / distance;
   const dy = (to.y - from.y) / distance;
-  const startInset = fromItem.id ? 22 : 0;
-  const endInset = toItem.id ? (dy < -.85 ? 48 : 24) : 2;
+  const startInset = 22;
+  const endInset = dy < -.85 ? 48 : 24;
   ui.pathLayer.append(svgNode('line', {
     x1: from.x + startInset * dx, y1: from.y + startInset * dy,
     x2: to.x - endInset * dx, y2: to.y - endInset * dy,
     class: 'route-line', 'marker-end': 'url(#route-arrow)'
   }));
-  if (!toItem.id) {
-    ui.pathLayer.append(svgNode('circle', { cx: to.x, cy: to.y, r: 4, class: 'route-corner' }));
-  }
 }
 
 function renderMap() {
@@ -1626,17 +1631,16 @@ function renderMap() {
     const steps = [];
     if (item.x) steps.push(`向${item.x > 0 ? '右' : '左'} ${metres(Math.abs(item.x))}`);
     if (item.y) steps.push(`向${item.y > 0 ? '下' : '上'} ${metres(Math.abs(item.y))}`);
-    return `${item.name}：${steps.join('、')}`;
+    return `${steps.join('，')}是${item.name}。`;
   });
-  ui.mapSvgDesc.textContent = `地圖上方是北，人物固定在中心。每格代表 ${metres(1)}。由中心看，${positions.join('；')}。`;
+  ui.mapSvgDesc.textContent = `地圖上方是北，你在地圖中間。每格是 ${metres(1)}。由你的位置看，${positions.join('')}`;
 }
 
 function updateSensorUi() {
   const engaged = sensorActive || sensorWaiting;
   selectButton(ui.sensorBtn, engaged);
-  ui.sensorBtnText.textContent = engaged ? '關閉感應' : '啟用感應';
-  ui.sensorStatus.textContent = sensorActive ? '感應器運作中' : sensorWaiting ? '等待方向資料…' : '按鈕控制轉向';
-  ui.arHeadingSubtitle.textContent = sensorActive ? '感應 · 遊戲北' : '手動 · 遊戲北';
+  ui.sensorBtnText.textContent = engaged ? '改用按鈕' : '轉動 iPad';
+  ui.sensorStatus.textContent = sensorActive ? '平放 iPad，再慢慢轉。' : sensorWaiting ? '請等一等…' : '用按鈕轉身。';
   ui.calibrateBtn.disabled = !sensorActive;
 }
 
@@ -1652,7 +1656,7 @@ function renderHUD() {
     tick.style.left = position;
     scale.append(tick);
     if (major) {
-      const label = node('span', 'tick-label', byAngle(degree).id);
+      const label = node('span', 'tick-label', byAngle(degree).name);
       label.style.left = position;
       scale.append(label);
     }
@@ -1706,9 +1710,7 @@ function renderARLandmarks() {
 function renderAR() {
   updateSensorUi();
   if (state.mode !== 'ar') return;
-  const heading = Math.round(state.heading) % 360;
-  ui.arHeadingNumber.textContent = `${pad(heading, 3)}°`;
-  ui.facingBadge.textContent = `面向${byAngle(state.heading).name}`;
+  ui.arHeadingName.textContent = byAngle(state.heading).name + '方';
   renderHUD();
   renderARLandmarks();
 }
@@ -1771,11 +1773,11 @@ function disableSensor() {
 async function toggleSensor() {
   if (sensorListening || sensorWaiting) {
     disableSensor();
-    toast('已改用轉向按鈕。');
+    toast('現在可以用按鈕轉身。');
     return;
   }
   if (!window.isSecureContext || typeof DeviceOrientationEvent === 'undefined') {
-    toast('方向感應需要 HTTPS 和裝置支援。可用轉向按鈕繼續。');
+    toast('請用左轉或右轉按鈕。');
     return;
   }
   const request = ++sensorRequestSeq;
@@ -1791,16 +1793,16 @@ async function toggleSensor() {
     sensorListening = true;
     window.addEventListener('deviceorientation', orientationRead);
     window.addEventListener('deviceorientationabsolute', orientationRead);
-    toast('水平轉動 iPad，或按「設為遊戲北」重新校準。');
+    toast('平放 iPad，慢慢轉。');
     sensorTimeout = window.setTimeout(() => {
       if (request !== sensorRequestSeq || !sensorWaiting) return;
       disableSensor();
-      toast('暫未收到方向資料。可用轉向按鈕繼續。');
+      toast('請用左轉或右轉按鈕。');
     }, 5000);
   } catch {
     if (request !== sensorRequestSeq) return;
     disableSensor();
-    toast('感應器未能啟用。可用轉向按鈕繼續。');
+    toast('請用左轉或右轉按鈕。');
   }
 }
 
@@ -1809,7 +1811,7 @@ function calibrateNorth() {
   sensorZero = sensorLastRaw;
   state.heading = 0;
   renderAR();
-  toast('目前持機方向已設為遊戲北。');
+  toast('你現在面向遊戲的北方。');
 }
 
 function manualTurn(step) {
@@ -1821,7 +1823,7 @@ function manualTurn(step) {
 function updateCameraUi() {
   selectButton(ui.cameraBtn, cameraReady);
   ui.cameraBtn.classList.toggle('connecting', cameraPending);
-  ui.cameraBtnText.textContent = cameraPending ? '取消開啟' : cameraReady ? '關閉自拍' : '自拍背景';
+  ui.cameraBtnText.textContent = cameraPending ? '取消' : cameraReady ? '關自拍' : '自拍背景';
   ui.app.classList.toggle('selfie-on', cameraReady);
 }
 
@@ -1843,7 +1845,7 @@ async function toggleCamera() {
     return;
   }
   if (!window.isSecureContext || !navigator.mediaDevices?.getUserMedia) {
-    toast('自拍背景需要 HTTPS 和 Safari 相機權限。');
+    toast('請用 Safari 開啟網站，再試自拍。');
     return;
   }
   const request = ++cameraRequestSeq;
@@ -1866,7 +1868,7 @@ async function toggleCamera() {
     track.addEventListener('ended', () => {
       if (cameraStream !== stream) return;
       stopCamera();
-      toast('前鏡頭已停止，已恢復原本背景。');
+      toast('自拍已關掉。');
     });
     ui.cameraVideo.srcObject = stream;
     ui.cameraBackdrop.hidden = false;
@@ -1875,11 +1877,11 @@ async function toggleCamera() {
     cameraReady = true;
     cameraPending = false;
     updateCameraUi();
-    toast('自拍背景已開啟，畫面只在本機顯示。');
+    toast('自拍畫面只會在你的 iPad 上顯示。');
   } catch {
     if (request !== cameraRequestSeq) return;
     stopCamera();
-    toast('未能開啟前鏡頭。可繼續作答。');
+    toast('未能開啟自拍。你可以繼續答題。');
   }
 }
 
@@ -1888,11 +1890,13 @@ ui.chooseModeBtn.addEventListener('click', showIntro);
 ui.introTeachingBtn.addEventListener('click', () => setDifficulty('teaching'));
 ui.introChallengeBtn.addEventListener('click', () => setDifficulty('challenge'));
 ui.startBtn.addEventListener('click', () => { setScreen(true); resetGame(); });
-ui.restartBtn.addEventListener('click', () => { resetGame(); toast('已生成新的地圖和八道題目。'); });
+ui.restartBtn.addEventListener('click', () => { resetGame(); toast('有新的地圖和題目了！'); });
 ui.mapModeBtn.addEventListener('click', () => setMode('map'));
 ui.arModeBtn.addEventListener('click', () => setMode('ar'));
 ui.hintBtn.addEventListener('click', showHint);
 ui.nextBtn.addEventListener('click', next);
+ui.finishBtn.addEventListener('click', () => { if (state.phase === 'offer') showResults(); });
+ui.specialBtn.addEventListener('click', () => { if (state.phase === 'offer') advanceQuestion(); });
 ui.cameraBtn.addEventListener('click', toggleCamera);
 ui.sensorBtn.addEventListener('click', toggleSensor);
 ui.calibrateBtn.addEventListener('click', calibrateNorth);
